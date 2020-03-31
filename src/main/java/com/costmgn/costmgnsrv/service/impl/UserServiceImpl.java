@@ -1,5 +1,6 @@
 package com.costmgn.costmgnsrv.service.impl;
 
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.mapper.UserMapper;
 import com.costmgn.costmgnsrv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,5 +13,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserMapper mapper) {
         this.mapper = mapper;
+    }
+
+    @Override
+    public User getUser(String userid) {
+        return null;
     }
 }
