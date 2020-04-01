@@ -49,7 +49,7 @@ public class UserController {
         return WebApiResponse.success(true);
     }
 
-    @RequestMapping("/deleteUser")
+    @RequestMapping("/removeUser")
     public WebApiResponse<Boolean> deleteUser(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);
     }

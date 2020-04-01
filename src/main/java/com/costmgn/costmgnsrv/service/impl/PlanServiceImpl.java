@@ -1,8 +1,8 @@
 package com.costmgn.costmgnsrv.service.impl;
 
-import com.costmgn.costmgnsrv.service.WorkService;
+import com.costmgn.costmgnsrv.service.PlanService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WorkServiceImpl implements WorkService {
+public class PlanServiceImpl implements PlanService {
 }

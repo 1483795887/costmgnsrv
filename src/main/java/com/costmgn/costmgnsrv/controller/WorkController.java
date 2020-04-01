@@ -22,13 +22,13 @@ public class WorkController {
     }
 
     @RequestMapping("/getCurWorks")
-    public WebApiResponse<List<WorkBean>> getUserList() {
+    public WebApiResponse<List<WorkBean>> getCurWorks() {
         List<WorkBean> workList = new ArrayList<>();
         return WebApiResponse.success(workList);
     }
 
     @RequestMapping("/getToDoWorks")
-    public WebApiResponse<List<WorkBean>> addUser() {
+    public WebApiResponse<List<WorkBean>> getToDoWorks() {
         List<WorkBean> workList = new ArrayList<>();
         return WebApiResponse.success(workList);
     }
