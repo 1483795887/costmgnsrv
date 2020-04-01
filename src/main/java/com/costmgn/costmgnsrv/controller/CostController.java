@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class CostController {
     }
 
     @RequestMapping("/getCost")
-    public WebApiResponse<List<CostBean>> getCosts() {
+    public WebApiResponse<List<CostBean>> getCosts(HttpServletRequest request) {
         List<CostBean> costList = new ArrayList<>();
         return WebApiResponse.success(costList);
     }

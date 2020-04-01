@@ -16,5 +16,5 @@ public interface UserService {
 
     UserBean getUser(String userid);
 
-    List<UserBean> getUsers();
+    List<UserBean> getUsers(UserBean userBean);
 }

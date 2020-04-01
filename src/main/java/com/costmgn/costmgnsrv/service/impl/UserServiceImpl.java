@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserBean> getUsers() {
+    public List<UserBean> getUsers(UserBean userBean) {
         return null;
     }
 }

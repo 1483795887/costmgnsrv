@@ -1,5 +1,6 @@
 package com.costmgn.costmgnsrv.service.impl;
 
+import com.costmgn.costmgnsrv.bean.UserBean;
 import com.costmgn.costmgnsrv.bean.WorkBean;
 import com.costmgn.costmgnsrv.mapper.WorkMapper;
 import com.costmgn.costmgnsrv.service.WorkService;
@@ -23,12 +24,12 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public List<WorkBean> getCurWorks() {
+    public List<WorkBean> getCurWorks(UserBean userBean) {
         return null;
     }
 
     @Override
-    public List<WorkBean> getToDoWorks() {
+    public List<WorkBean> getToDoWorks(UserBean userBean) {
         return null;
     }
 }

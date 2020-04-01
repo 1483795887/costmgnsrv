@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class ContractController {
     }
 
     @RequestMapping("/getContracts")
-    public WebApiResponse<List<ContractBean>> getContracts() {
+    public WebApiResponse<List<ContractBean>> getContracts(HttpServletRequest request) {
         List<ContractBean> contractList = new ArrayList<>();
         return WebApiResponse.success(contractList);
     }

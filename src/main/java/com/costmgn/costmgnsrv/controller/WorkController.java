@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +23,13 @@ public class WorkController {
     }
 
     @RequestMapping("/getCurWorks")
-    public WebApiResponse<List<WorkBean>> getCurWorks() {
+    public WebApiResponse<List<WorkBean>> getCurWorks(HttpServletRequest request) {
         List<WorkBean> workList = new ArrayList<>();
         return WebApiResponse.success(workList);
     }
 
     @RequestMapping("/getToDoWorks")
-    public WebApiResponse<List<WorkBean>> getToDoWorks() {
+    public WebApiResponse<List<WorkBean>> getToDoWorks(HttpServletRequest request) {
         List<WorkBean> workList = new ArrayList<>();
         return WebApiResponse.success(workList);
     }

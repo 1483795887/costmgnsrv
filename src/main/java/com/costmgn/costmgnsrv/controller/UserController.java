@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @RequestMapping("/getUserList")
-    public WebApiResponse<List<UserBean>> getUserList() {
+    public WebApiResponse<List<UserBean>> getUserList(HttpServletRequest request) {
         List<UserBean> userList = new ArrayList<>();
         return WebApiResponse.success(userList);
     }
