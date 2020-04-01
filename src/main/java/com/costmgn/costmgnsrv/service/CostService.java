@@ -1,16 +1,14 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.bean.CostBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Receipt;
+import com.costmgn.costmgnsrv.entity.User;
 
 import java.util.List;
 
 public interface CostService {
-    CostBean getCost(int id);
+    Receipt getCost(int id);
 
-    List<CostBean> getCosts(UserBean user);
+    List<Receipt> getCosts(User user, int type);
 
-    void addCost(CostBean bean);
-
-    void updateCostStatus(CostBean bean);
+    void addCost(Receipt bean);
 }

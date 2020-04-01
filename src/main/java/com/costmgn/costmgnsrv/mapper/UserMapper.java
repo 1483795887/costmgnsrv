@@ -2,9 +2,8 @@ package com.costmgn.costmgnsrv.mapper;
 
 import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -18,8 +17,6 @@ public interface UserMapper {
     int insertSelective(User record);
 
     List<User> selectByExample(UserExample example);
-
-    int selectMaxId();
 
     User selectByPrimaryKey(Integer id);
 

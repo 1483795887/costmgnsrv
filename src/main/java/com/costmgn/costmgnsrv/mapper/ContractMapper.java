@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.mapper;
 
-import com.costmgn.costmgnsrv.bean.Contract;
-import com.costmgn.costmgnsrv.bean.ContractExample;
+import com.costmgn.costmgnsrv.entity.Contract;
+import com.costmgn.costmgnsrv.entity.ContractExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

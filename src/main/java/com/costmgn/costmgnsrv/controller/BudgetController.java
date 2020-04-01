@@ -1,7 +1,9 @@
 package com.costmgn.costmgnsrv.controller;
 
-import com.costmgn.costmgnsrv.bean.BudgetBean;
+import com.costmgn.costmgnsrv.entity.Budget;
 import com.costmgn.costmgnsrv.service.BudgetService;
+import com.costmgn.costmgnsrv.service.WorkService;
+import com.costmgn.costmgnsrv.utils.IdListBean;
 import com.costmgn.costmgnsrv.utils.WebApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,40 +19,47 @@ import java.util.List;
 @RequestMapping(value = "/budget", method = RequestMethod.POST)
 public class BudgetController {
     private BudgetService budgetService;
+    private WorkService workService;
 
     @Autowired
-    public BudgetController(BudgetService budgetService) {
+    public BudgetController(BudgetService budgetService, WorkService workService) {
         this.budgetService = budgetService;
+        this.workService = workService;
     }
 
     @RequestMapping("/addBudget")
-    public WebApiResponse<Boolean> addBudget(@RequestBody BudgetBean bean) {
+    public WebApiResponse<Boolean> addBudget(@RequestBody Budget budget) {
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/updateBudget")
-    public WebApiResponse<Boolean> updateBudget(@RequestBody BudgetBean bean) {
+    public WebApiResponse<Boolean> updateBudget(@RequestBody Budget budget) {
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/getBudgets")
-    public WebApiResponse<List<BudgetBean>> getBudgets(HttpServletRequest request) {
-        List<BudgetBean> budgetList = new ArrayList<>();
+    public WebApiResponse<List<Budget>> getBudgets(HttpServletRequest request, @RequestBody int type) {
+        List<Budget> budgetList = new ArrayList<>();
         return WebApiResponse.success(budgetList);
     }
 
+    @RequestMapping("/getBudget")
+    public WebApiResponse<Budget> getBudget(int id) {
+        return WebApiResponse.success(null);
+    }
+
     @RequestMapping("/submitBudget")
-    public WebApiResponse<Boolean> submitBudget(@RequestBody BudgetBean bean) {
+    public WebApiResponse<Boolean> submitBudget(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/approveBudget")
-    public WebApiResponse<Boolean> approvePlan(@RequestBody BudgetBean bean) {
+    public WebApiResponse<Boolean> approveBudget(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/refuseBudget")
-    public WebApiResponse<Boolean> refusePlan(@RequestBody BudgetBean bean) {
+    public WebApiResponse<Boolean> refuseBudget(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);
     }
 }

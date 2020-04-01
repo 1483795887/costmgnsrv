@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.mapper;
 
-import com.costmgn.costmgnsrv.bean.Receipt;
-import com.costmgn.costmgnsrv.bean.ReceiptExample;
+import com.costmgn.costmgnsrv.entity.Receipt;
+import com.costmgn.costmgnsrv.entity.ReceiptExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,10 +1,10 @@
-package com.costmgn.costmgnsrv.bean;
+package com.costmgn.costmgnsrv.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReceiptExample {
+public class BudgetExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class ReceiptExample {
 
     private Long offset;
 
-    public ReceiptExample() {
+    public BudgetExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -185,6 +185,126 @@ public class ReceiptExample {
             return (Criteria) this;
         }
 
+        public Criteria andYearIsNull() {
+            addCriterion("`year` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearIsNotNull() {
+            addCriterion("`year` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearEqualTo(Integer value) {
+            addCriterion("`year` =", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearNotEqualTo(Integer value) {
+            addCriterion("`year` <>", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearGreaterThan(Integer value) {
+            addCriterion("`year` >", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`year` >=", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearLessThan(Integer value) {
+            addCriterion("`year` <", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearLessThanOrEqualTo(Integer value) {
+            addCriterion("`year` <=", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearIn(List<Integer> values) {
+            addCriterion("`year` in", values, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearNotIn(List<Integer> values) {
+            addCriterion("`year` not in", values, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearBetween(Integer value1, Integer value2) {
+            addCriterion("`year` between", value1, value2, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearNotBetween(Integer value1, Integer value2) {
+            addCriterion("`year` not between", value1, value2, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthIsNull() {
+            addCriterion("`month` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthIsNotNull() {
+            addCriterion("`month` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthEqualTo(Integer value) {
+            addCriterion("`month` =", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotEqualTo(Integer value) {
+            addCriterion("`month` <>", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthGreaterThan(Integer value) {
+            addCriterion("`month` >", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`month` >=", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthLessThan(Integer value) {
+            addCriterion("`month` <", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthLessThanOrEqualTo(Integer value) {
+            addCriterion("`month` <=", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthIn(List<Integer> values) {
+            addCriterion("`month` in", values, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotIn(List<Integer> values) {
+            addCriterion("`month` not in", values, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthBetween(Integer value1, Integer value2) {
+            addCriterion("`month` between", value1, value2, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotBetween(Integer value1, Integer value2) {
+            addCriterion("`month` not between", value1, value2, "month");
+            return (Criteria) this;
+        }
+
         public Criteria andMoneyIsNull() {
             addCriterion("money is null");
             return (Criteria) this;
@@ -315,63 +435,63 @@ public class ReceiptExample {
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdIsNull() {
-            addCriterion("budget_id is null");
+        public Criteria andOccupyMoneyIsNull() {
+            addCriterion("occupy_money is null");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdIsNotNull() {
-            addCriterion("budget_id is not null");
+        public Criteria andOccupyMoneyIsNotNull() {
+            addCriterion("occupy_money is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdEqualTo(Integer value) {
-            addCriterion("budget_id =", value, "budgetId");
+        public Criteria andOccupyMoneyEqualTo(BigDecimal value) {
+            addCriterion("occupy_money =", value, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdNotEqualTo(Integer value) {
-            addCriterion("budget_id <>", value, "budgetId");
+        public Criteria andOccupyMoneyNotEqualTo(BigDecimal value) {
+            addCriterion("occupy_money <>", value, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdGreaterThan(Integer value) {
-            addCriterion("budget_id >", value, "budgetId");
+        public Criteria andOccupyMoneyGreaterThan(BigDecimal value) {
+            addCriterion("occupy_money >", value, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("budget_id >=", value, "budgetId");
+        public Criteria andOccupyMoneyGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("occupy_money >=", value, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdLessThan(Integer value) {
-            addCriterion("budget_id <", value, "budgetId");
+        public Criteria andOccupyMoneyLessThan(BigDecimal value) {
+            addCriterion("occupy_money <", value, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdLessThanOrEqualTo(Integer value) {
-            addCriterion("budget_id <=", value, "budgetId");
+        public Criteria andOccupyMoneyLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("occupy_money <=", value, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdIn(List<Integer> values) {
-            addCriterion("budget_id in", values, "budgetId");
+        public Criteria andOccupyMoneyIn(List<BigDecimal> values) {
+            addCriterion("occupy_money in", values, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdNotIn(List<Integer> values) {
-            addCriterion("budget_id not in", values, "budgetId");
+        public Criteria andOccupyMoneyNotIn(List<BigDecimal> values) {
+            addCriterion("occupy_money not in", values, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdBetween(Integer value1, Integer value2) {
-            addCriterion("budget_id between", value1, value2, "budgetId");
+        public Criteria andOccupyMoneyBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("occupy_money between", value1, value2, "occupyMoney");
             return (Criteria) this;
         }
 
-        public Criteria andBudgetIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("budget_id not between", value1, value2, "budgetId");
+        public Criteria andOccupyMoneyNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("occupy_money not between", value1, value2, "occupyMoney");
             return (Criteria) this;
         }
 

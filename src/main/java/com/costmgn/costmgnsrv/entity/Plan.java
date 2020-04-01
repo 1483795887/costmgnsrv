@@ -1,4 +1,4 @@
-package com.costmgn.costmgnsrv.bean;
+package com.costmgn.costmgnsrv.entity;
 
 import java.io.Serializable;
 

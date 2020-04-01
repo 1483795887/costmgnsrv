@@ -1,20 +1,20 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.utils.ChangePasswordBean;
 
 import java.util.List;
 
 public interface UserService {
-    void addUser(UserBean bean);
+    void addUser(User bean);
 
     void removeUser(int id);
 
     void updatePassword(ChangePasswordBean bean);
 
-    boolean login(UserBean bean);
+    boolean login(User bean);
 
-    UserBean getUser(String userid);
+    User getUser(String userid);
 
-    List<UserBean> getUsers(UserBean userBean);
+    List<User> getUsers(User user);
 }

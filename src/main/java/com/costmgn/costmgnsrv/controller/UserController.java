@@ -1,6 +1,6 @@
 package com.costmgn.costmgnsrv.controller;
 
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.service.UserService;
 import com.costmgn.costmgnsrv.utils.ChangePasswordBean;
 import com.costmgn.costmgnsrv.utils.IdListBean;
@@ -27,10 +27,11 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public WebApiResponse<Boolean> login(@RequestBody UserBean user, HttpServletRequest request) {
+    public WebApiResponse<User> login(@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("user", userService.getUser(user.getUserid()));
-        return WebApiResponse.success(true);
+        User userBean = userService.getUser(user.getUserid());
+        session.setAttribute("user", userBean);
+        return WebApiResponse.success(userBean);
     }
 
     @RequestMapping("/updatePassword")
@@ -39,18 +40,18 @@ public class UserController {
     }
 
     @RequestMapping("/getUserList")
-    public WebApiResponse<List<UserBean>> getUserList(HttpServletRequest request) {
-        List<UserBean> userList = new ArrayList<>();
+    public WebApiResponse<List<User>> getUserList(HttpServletRequest request) {
+        List<User> userList = new ArrayList<>();
         return WebApiResponse.success(userList);
     }
 
     @RequestMapping("/addUser")
-    public WebApiResponse<Boolean> addUser() {
+    public WebApiResponse<Boolean> addUser(User bean) {
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/removeUser")
-    public WebApiResponse<Boolean> deleteUser(@RequestBody IdListBean bean) {
+    public WebApiResponse<Boolean> removeUser(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);
     }
 }

@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.service.impl;
 
-import com.costmgn.costmgnsrv.bean.ContractBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Contract;
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.mapper.ContractMapper;
 import com.costmgn.costmgnsrv.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +17,23 @@ public class ContractServiceImpl implements ContractService {
     public ContractServiceImpl(ContractMapper mapper) {
         this.mapper = mapper;
     }
-
     @Override
-    public ContractBean getContract(int id) {
+    public Contract getContract(int id) {
         return null;
     }
 
     @Override
-    public List<ContractBean> getContracts(UserBean user) {
+    public List<Contract> getContracts(User user, int type) {
         return null;
     }
 
     @Override
-    public void addContract(ContractBean bean) {
+    public void addContract(Contract bean) {
 
     }
 
     @Override
-    public void updateContract(ContractBean bean) {
-
-    }
-
-    @Override
-    public void updateContractStatus(ContractBean bean) {
+    public void updateContract(Contract bean) {
 
     }
 }

@@ -1,18 +1,16 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.bean.BudgetBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Budget;
+import com.costmgn.costmgnsrv.entity.User;
 
 import java.util.List;
 
 public interface BudgetService {
-    BudgetBean getBudget(int id);
+    Budget getBudget(int id);
 
-    List<BudgetBean> getBudgets(UserBean user);
+    List<Budget> getBudgets(User user, int type);
 
-    void addBudget(BudgetBean bean);
+    void addBudget(Budget bean);
 
-    void updateBudget(BudgetBean bean);
-
-    void updateBudgetStatus(BudgetBean bean);
+    void updateBudget(Budget bean);
 }

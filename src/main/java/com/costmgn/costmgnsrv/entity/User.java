@@ -2,20 +2,22 @@ package com.costmgn.costmgnsrv.entity;
 
 import java.io.Serializable;
 
-/**
- * user
- *
- * @author
- */
 public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     private String userid;
+
     private String password;
+
     private String name;
+
     private String department;
+
     private String post;
+
     private Boolean inpost;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.costmgn.costmgnsrv.mapper.ReceiptMapper">
-  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.bean.Receipt">
+  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Receipt">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="type" jdbcType="VARCHAR" property="type" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, money, `type`, budget_id, work_id
   </sql>
-  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.bean.ReceiptExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.ReceiptExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,19 +101,19 @@
     delete from receipt
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.bean.ReceiptExample">
+  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.entity.ReceiptExample">
     delete from receipt
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Receipt" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Receipt" useGeneratedKeys="true">
     insert into receipt (money, `type`, budget_id, 
       work_id)
     values (#{money,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, #{budgetId,jdbcType=INTEGER}, 
       #{workId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Receipt" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Receipt" useGeneratedKeys="true">
     insert into receipt
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="money != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.bean.ReceiptExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.ReceiptExample" resultType="java.lang.Long">
     select count(*) from receipt
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.bean.Receipt">
+  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.entity.Receipt">
     update receipt
     <set>
       <if test="money != null">
@@ -202,7 +202,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.bean.Receipt">
+  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Receipt">
     update receipt
     set money = #{money,jdbcType=DECIMAL},
       `type` = #{type,jdbcType=VARCHAR},

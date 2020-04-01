@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.costmgn.costmgnsrv.mapper.ContractMapper">
-  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.bean.Contract">
+  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Contract">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="contract_no" jdbcType="VARCHAR" property="contractNo" />
     <result column="contract_date" jdbcType="DATE" property="contractDate" />
@@ -78,7 +78,7 @@
     id, contract_no, contract_date, money, pay_method, pay_request, company, legal_person, 
     last_month, plan_id, title, description, work_id
   </sql>
-  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.bean.ContractExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.ContractExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -110,13 +110,13 @@
     delete from contract
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.bean.ContractExample">
+  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.entity.ContractExample">
     delete from contract
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Contract" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Contract" useGeneratedKeys="true">
     insert into contract (contract_no, contract_date, money, 
       pay_method, pay_request, company, 
       legal_person, last_month, plan_id, 
@@ -128,7 +128,7 @@
       #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{workId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Contract" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Contract" useGeneratedKeys="true">
     insert into contract
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="contractNo != null">
@@ -207,7 +207,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.bean.ContractExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.ContractExample" resultType="java.lang.Long">
     select count(*) from contract
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -279,7 +279,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.bean.Contract">
+  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.entity.Contract">
     update contract
     <set>
       <if test="contractNo != null">
@@ -321,7 +321,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.bean.Contract">
+  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Contract">
     update contract
     set contract_no = #{contractNo,jdbcType=VARCHAR},
       contract_date = #{contractDate,jdbcType=DATE},

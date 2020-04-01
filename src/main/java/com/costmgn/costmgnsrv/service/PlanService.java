@@ -1,18 +1,16 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.bean.PlanBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Plan;
+import com.costmgn.costmgnsrv.entity.User;
 
 import java.util.List;
 
 public interface PlanService {
-    PlanBean getPlan(int id);
+    Plan getPlan(int id);
 
-    List<PlanBean> getPlans(UserBean user);
+    List<Plan> getPlans(User user, int type);
 
-    void addPlan(PlanBean bean);
+    void addPlan(Plan bean);
 
-    void updatePlan(PlanBean bean);
-
-    void updatePlanStatus(PlanBean bean);
+    void updatePlan(Plan bean);
 }

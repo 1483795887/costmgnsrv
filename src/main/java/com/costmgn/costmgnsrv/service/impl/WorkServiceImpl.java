@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.service.impl;
 
-import com.costmgn.costmgnsrv.bean.UserBean;
-import com.costmgn.costmgnsrv.bean.WorkBean;
+import com.costmgn.costmgnsrv.entity.User;
+import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.mapper.WorkMapper;
 import com.costmgn.costmgnsrv.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,17 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public WorkBean getWork(int id) {
+    public List<Work> getCurWorks(User user) {
         return null;
     }
 
     @Override
-    public List<WorkBean> getCurWorks(UserBean userBean) {
+    public List<Work> getToDoWorks(User user) {
         return null;
     }
 
     @Override
-    public List<WorkBean> getToDoWorks(UserBean userBean) {
-        return null;
+    public void updateStatus(int id, String status) {
+
     }
 }

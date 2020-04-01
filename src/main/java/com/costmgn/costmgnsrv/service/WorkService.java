@@ -1,14 +1,14 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.bean.UserBean;
-import com.costmgn.costmgnsrv.bean.WorkBean;
+import com.costmgn.costmgnsrv.entity.User;
+import com.costmgn.costmgnsrv.entity.Work;
 
 import java.util.List;
 
 public interface WorkService {
-    WorkBean getWork(int id);
+    List<Work> getCurWorks(User user);
 
-    List<WorkBean> getCurWorks(UserBean userBean);
+    List<Work> getToDoWorks(User user);
 
-    List<WorkBean> getToDoWorks(UserBean userBean);
+    void updateStatus(int id, String status);
 }

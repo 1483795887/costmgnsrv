@@ -1,6 +1,6 @@
 package com.costmgn.costmgnsrv.controller;
 
-import com.costmgn.costmgnsrv.bean.WorkBean;
+import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.service.WorkService;
 import com.costmgn.costmgnsrv.utils.WebApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,14 @@ public class WorkController {
     }
 
     @RequestMapping("/getCurWorks")
-    public WebApiResponse<List<WorkBean>> getCurWorks(HttpServletRequest request) {
-        List<WorkBean> workList = new ArrayList<>();
+    public WebApiResponse<List<Work>> getCurWorks(HttpServletRequest request) {
+        List<Work> workList = new ArrayList<>();
         return WebApiResponse.success(workList);
     }
 
     @RequestMapping("/getToDoWorks")
-    public WebApiResponse<List<WorkBean>> getToDoWorks(HttpServletRequest request) {
-        List<WorkBean> workList = new ArrayList<>();
+    public WebApiResponse<List<Work>> getToDoWorks(HttpServletRequest request) {
+        List<Work> workList = new ArrayList<>();
         return WebApiResponse.success(workList);
     }
 }

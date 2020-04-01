@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.service.impl;
 
-import com.costmgn.costmgnsrv.bean.CostBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Receipt;
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.mapper.ReceiptMapper;
 import com.costmgn.costmgnsrv.service.CostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +17,18 @@ public class CostServiceImpl implements CostService {
     public CostServiceImpl(ReceiptMapper mapper) {
         this.mapper = mapper;
     }
-
-
     @Override
-    public CostBean getCost(int id) {
+    public Receipt getCost(int id) {
         return null;
     }
 
     @Override
-    public List<CostBean> getCosts(UserBean user) {
+    public List<Receipt> getCosts(User user, int type) {
         return null;
     }
 
     @Override
-    public void addCost(CostBean bean) {
-
-    }
-
-    @Override
-    public void updateCostStatus(CostBean bean) {
+    public void addCost(Receipt bean) {
 
     }
 }

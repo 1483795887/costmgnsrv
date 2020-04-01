@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.service.impl;
 
-import com.costmgn.costmgnsrv.bean.PlanBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Plan;
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.mapper.PlanMapper;
 import com.costmgn.costmgnsrv.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,29 +18,23 @@ public class PlanServiceImpl implements PlanService {
         this.mapper = mapper;
     }
 
-
     @Override
-    public PlanBean getPlan(int id) {
+    public Plan getPlan(int id) {
         return null;
     }
 
     @Override
-    public List<PlanBean> getPlans(UserBean user) {
+    public List<Plan> getPlans(User user, int type) {
         return null;
     }
 
     @Override
-    public void addPlan(PlanBean bean) {
+    public void addPlan(Plan bean) {
 
     }
 
     @Override
-    public void updatePlan(PlanBean bean) {
-
-    }
-
-    @Override
-    public void updatePlanStatus(PlanBean bean) {
+    public void updatePlan(Plan bean) {
 
     }
 }

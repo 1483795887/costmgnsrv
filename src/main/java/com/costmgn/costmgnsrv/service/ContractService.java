@@ -1,18 +1,16 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.bean.ContractBean;
-import com.costmgn.costmgnsrv.bean.UserBean;
+import com.costmgn.costmgnsrv.entity.Contract;
+import com.costmgn.costmgnsrv.entity.User;
 
 import java.util.List;
 
 public interface ContractService {
-    ContractBean getContract(int id);
+    Contract getContract(int id);
 
-    List<ContractBean> getContracts(UserBean user);
+    List<Contract> getContracts(User user, int type);
 
-    void addContract(ContractBean bean);
+    void addContract(Contract bean);
 
-    void updateContract(ContractBean bean);
-
-    void updateContractStatus(ContractBean bean);
+    void updateContract(Contract bean);
 }
