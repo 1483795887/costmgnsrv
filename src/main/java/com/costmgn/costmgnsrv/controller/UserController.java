@@ -1,6 +1,6 @@
 package com.costmgn.costmgnsrv.controller;
 
-import com.costmgn.costmgnsrv.entity.User;
+import com.costmgn.costmgnsrv.bean.UserBean;
 import com.costmgn.costmgnsrv.service.UserService;
 import com.costmgn.costmgnsrv.utils.ChangePasswordBean;
 import com.costmgn.costmgnsrv.utils.IdListBean;
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public WebApiResponse<Boolean> login(@RequestBody User user, HttpServletRequest request) {
+    public WebApiResponse<Boolean> login(@RequestBody UserBean user, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("user", userService.getUser(user.getUserid()));
         return WebApiResponse.success(true);
@@ -39,8 +39,8 @@ public class UserController {
     }
 
     @RequestMapping("/getUserList")
-    public WebApiResponse<List<User>> getUserList() {
-        List<User> userList = new ArrayList<>();
+    public WebApiResponse<List<UserBean>> getUserList() {
+        List<UserBean> userList = new ArrayList<>();
         return WebApiResponse.success(userList);
     }
 

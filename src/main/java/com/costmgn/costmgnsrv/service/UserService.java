@@ -1,7 +1,7 @@
 package com.costmgn.costmgnsrv.service;
 
-import com.costmgn.costmgnsrv.entity.User;
+import com.costmgn.costmgnsrv.bean.UserBean;
 
 public interface UserService {
-    User getUser(String userid);
+    UserBean getUser(String userid);
 }
