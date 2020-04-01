@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.costmgn.costmgnsrv.mapper.BudgetMapper">
+  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.bean.Budget">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="month" jdbcType="INTEGER" property="month" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="occupy_money" jdbcType="DECIMAL" property="occupyMoney" />
+    <result column="work_id" jdbcType="INTEGER" property="workId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `year`, `month`, money, `type`, occupy_money, work_id
+  </sql>
+  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.bean.BudgetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from budget
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from budget
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from budget
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.bean.BudgetExample">
+    delete from budget
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Budget" useGeneratedKeys="true">
+    insert into budget (`year`, `month`, money, 
+      `type`, occupy_money, work_id
+      )
+    values (#{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{type,jdbcType=VARCHAR}, #{occupyMoney,jdbcType=DECIMAL}, #{workId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Budget" useGeneratedKeys="true">
+    insert into budget
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="year != null">
+        `year`,
+      </if>
+      <if test="month != null">
+        `month`,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="occupyMoney != null">
+        occupy_money,
+      </if>
+      <if test="workId != null">
+        work_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="occupyMoney != null">
+        #{occupyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="workId != null">
+        #{workId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.bean.BudgetExample" resultType="java.lang.Long">
+    select count(*) from budget
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update budget
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null">
+        `year` = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null">
+        `month` = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupyMoney != null">
+        occupy_money = #{record.occupyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.workId != null">
+        work_id = #{record.workId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update budget
+    set id = #{record.id,jdbcType=INTEGER},
+      `year` = #{record.year,jdbcType=INTEGER},
+      `month` = #{record.month,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=DECIMAL},
+      `type` = #{record.type,jdbcType=VARCHAR},
+      occupy_money = #{record.occupyMoney,jdbcType=DECIMAL},
+      work_id = #{record.workId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.bean.Budget">
+    update budget
+    <set>
+      <if test="year != null">
+        `year` = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        `month` = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="occupyMoney != null">
+        occupy_money = #{occupyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="workId != null">
+        work_id = #{workId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.bean.Budget">
+    update budget
+    set `year` = #{year,jdbcType=INTEGER},
+      `month` = #{month,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      `type` = #{type,jdbcType=VARCHAR},
+      occupy_money = #{occupyMoney,jdbcType=DECIMAL},
+      work_id = #{workId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

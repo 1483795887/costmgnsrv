@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.costmgn.costmgnsrv.mapper.ContractMapper">
+  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.bean.Contract">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="contract_no" jdbcType="VARCHAR" property="contractNo" />
+    <result column="contract_date" jdbcType="DATE" property="contractDate" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
+    <result column="pay_request" jdbcType="VARCHAR" property="payRequest" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="legal_person" jdbcType="VARCHAR" property="legalPerson" />
+    <result column="last_month" jdbcType="INTEGER" property="lastMonth" />
+    <result column="plan_id" jdbcType="INTEGER" property="planId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="work_id" jdbcType="INTEGER" property="workId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, contract_no, contract_date, money, pay_method, pay_request, company, legal_person, 
+    last_month, plan_id, title, description, work_id
+  </sql>
+  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.bean.ContractExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from contract
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.bean.ContractExample">
+    delete from contract
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Contract" useGeneratedKeys="true">
+    insert into contract (contract_no, contract_date, money, 
+      pay_method, pay_request, company, 
+      legal_person, last_month, plan_id, 
+      title, description, work_id
+      )
+    values (#{contractNo,jdbcType=VARCHAR}, #{contractDate,jdbcType=DATE}, #{money,jdbcType=DECIMAL}, 
+      #{payMethod,jdbcType=VARCHAR}, #{payRequest,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{legalPerson,jdbcType=VARCHAR}, #{lastMonth,jdbcType=INTEGER}, #{planId,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{workId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.bean.Contract" useGeneratedKeys="true">
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractNo != null">
+        contract_no,
+      </if>
+      <if test="contractDate != null">
+        contract_date,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="payMethod != null">
+        pay_method,
+      </if>
+      <if test="payRequest != null">
+        pay_request,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="legalPerson != null">
+        legal_person,
+      </if>
+      <if test="lastMonth != null">
+        last_month,
+      </if>
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="workId != null">
+        work_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractNo != null">
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contractDate != null">
+        #{contractDate,jdbcType=DATE},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="payMethod != null">
+        #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payRequest != null">
+        #{payRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastMonth != null">
+        #{lastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null">
+        #{workId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.bean.ContractExample" resultType="java.lang.Long">
+    select count(*) from contract
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update contract
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractNo != null">
+        contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractDate != null">
+        contract_date = #{record.contractDate,jdbcType=DATE},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payMethod != null">
+        pay_method = #{record.payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payRequest != null">
+        pay_request = #{record.payRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null">
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPerson != null">
+        legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastMonth != null">
+        last_month = #{record.lastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.planId != null">
+        plan_id = #{record.planId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workId != null">
+        work_id = #{record.workId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update contract
+    set id = #{record.id,jdbcType=INTEGER},
+      contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      contract_date = #{record.contractDate,jdbcType=DATE},
+      money = #{record.money,jdbcType=DECIMAL},
+      pay_method = #{record.payMethod,jdbcType=VARCHAR},
+      pay_request = #{record.payRequest,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      last_month = #{record.lastMonth,jdbcType=INTEGER},
+      plan_id = #{record.planId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      work_id = #{record.workId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.bean.Contract">
+    update contract
+    <set>
+      <if test="contractNo != null">
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contractDate != null">
+        contract_date = #{contractDate,jdbcType=DATE},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="payMethod != null">
+        pay_method = #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payRequest != null">
+        pay_request = #{payRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastMonth != null">
+        last_month = #{lastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null">
+        plan_id = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null">
+        work_id = #{workId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.bean.Contract">
+    update contract
+    set contract_no = #{contractNo,jdbcType=VARCHAR},
+      contract_date = #{contractDate,jdbcType=DATE},
+      money = #{money,jdbcType=DECIMAL},
+      pay_method = #{payMethod,jdbcType=VARCHAR},
+      pay_request = #{payRequest,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      last_month = #{lastMonth,jdbcType=INTEGER},
+      plan_id = #{planId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      work_id = #{workId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
