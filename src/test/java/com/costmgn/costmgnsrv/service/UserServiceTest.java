@@ -4,6 +4,9 @@ import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.UserExample;
 import com.costmgn.costmgnsrv.mapper.UserMapper;
 import com.costmgn.costmgnsrv.service.impl.UserServiceImpl;
+import com.costmgn.costmgnsrv.utils.Department;
+import com.costmgn.costmgnsrv.utils.Post;
+import com.costmgn.costmgnsrv.utils.UserIdMaker;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -16,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
     private final static int TEST_ID = 1;
-    private final static String OLD_PASSWORD = "123456";
+    private final static String OLD_PASSWORD = "123456";//默认密码
     private final static String NEW_PASSWORD = "abcdedf";
     private final static String USER_ID = "20200302001";
     private UserService service;
@@ -54,6 +57,21 @@ public class UserServiceTest {
     public void shouldCallInsertWhenAddUser() {
         service.addUser(new User());
         verify(mapper).insert(any(User.class));
+    }
+
+    @Test
+    public void shouldSetDefaultValueWhenAddUser() {
+        testUser.setPost(Post.SalesMan.toString());
+        testUser.setDepartment(Department.PRODUCE.toString());
+        testUser.setPassword(null);
+        testUser.setInpost(false);
+        when(mapper.selectMaxId()).thenReturn(1);
+        service.addUser(testUser);
+
+        assertEquals(testUser.getPassword(), OLD_PASSWORD);
+        assertTrue(testUser.getInpost());
+        assertEquals(testUser.getUserid(), UserIdMaker.makeId(
+                Department.PRODUCE, Post.SalesMan, 1 + 1));
     }
 
     @Test

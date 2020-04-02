@@ -43,11 +43,6 @@ public class CostController {
         return WebApiResponse.success(null);
     }
 
-    @RequestMapping("/pay")
-    public WebApiResponse<Boolean> pay(@RequestBody IdListBean bean) {
-        return WebApiResponse.success(true);
-    }
-
     @RequestMapping("/approveCost")
     public WebApiResponse<Boolean> approveCost(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);

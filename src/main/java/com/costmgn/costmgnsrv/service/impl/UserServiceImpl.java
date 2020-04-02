@@ -4,6 +4,9 @@ import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.UserExample;
 import com.costmgn.costmgnsrv.mapper.UserMapper;
 import com.costmgn.costmgnsrv.service.UserService;
+import com.costmgn.costmgnsrv.utils.Department;
+import com.costmgn.costmgnsrv.utils.Post;
+import com.costmgn.costmgnsrv.utils.UserIdMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,9 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private final static String DEFAULT_PASSWORD = "123456";
+
+
     private UserMapper mapper;
 
     @Autowired
@@ -20,6 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User bean) {
+        bean.setInpost(true);
+        bean.setPassword(DEFAULT_PASSWORD);
+        bean.setUserid(UserIdMaker.makeId(Department.getDepartmentFromString(bean.getDepartment()),
+                Post.getPostFromString(bean.getPost()), mapper.selectMaxId() + 1));
         mapper.insert(bean);
     }
 

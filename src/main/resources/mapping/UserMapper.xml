@@ -242,4 +242,10 @@
       inpost = #{inpost,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectMaxId" resultType="int">
+    select max(id)
+    from user
+  </select>
 </mapper>
