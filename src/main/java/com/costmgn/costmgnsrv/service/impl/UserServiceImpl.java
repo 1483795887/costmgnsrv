@@ -10,6 +10,7 @@ import com.costmgn.costmgnsrv.utils.UserIdMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -72,7 +73,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsers(User user) {
         UserExample example = new UserExample();
-        example.createCriteria().andDepartmentEqualTo(user.getDepartment());
+        if(user.getPost().equals(Post.DepartmentManager.toString()))
+            example.createCriteria().andDepartmentEqualTo(user.getDepartment());
+        else if(!user.getPost().equals(Post.SystemManager.toString()))
+            return new ArrayList<>();
         return mapper.selectByExample(example);
     }
 }
