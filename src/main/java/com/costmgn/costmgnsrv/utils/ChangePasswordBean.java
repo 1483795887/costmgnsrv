@@ -1,16 +1,16 @@
 package com.costmgn.costmgnsrv.utils;
 
 public class ChangePasswordBean {
-    private Integer userid;
+    private Integer id;
     private String password;
     private String newPassword;
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPassword() {

@@ -1,9 +1,9 @@
 package com.costmgn.costmgnsrv.service.impl;
 
 import com.costmgn.costmgnsrv.entity.User;
+import com.costmgn.costmgnsrv.entity.UserExample;
 import com.costmgn.costmgnsrv.mapper.UserMapper;
 import com.costmgn.costmgnsrv.service.UserService;
-import com.costmgn.costmgnsrv.utils.ChangePasswordBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,31 +20,49 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User bean) {
-
+        mapper.insert(bean);
     }
 
     @Override
     public void removeUser(int id) {
-
+        User user = mapper.selectByPrimaryKey(id);
+        user.setInpost(false);
+        mapper.updateByPrimaryKey(user);
     }
 
     @Override
-    public void updatePassword(ChangePasswordBean bean) {
-
+    public void updatePassword(int id, String password) {
+        User user = mapper.selectByPrimaryKey(id);
+        user.setPassword(password);
+        mapper.updateByPrimaryKey(user);
     }
 
     @Override
-    public boolean login(User bean) {
-        return false;
+    public boolean login(String userId, String password) {
+        User user = getUser(userId);
+        if (user == null)
+            return false;
+        else {
+            return user.getPassword().equals(password);
+        }
     }
 
+    //由于userId的唯一性，导致userList只会有一个或另个
     @Override
-    public User getUser(String userid) {
-        return null;
+    public User getUser(String userId) {
+        UserExample example = new UserExample();
+        example.createCriteria().andUseridEqualTo(userId);
+        List<User> userList = mapper.selectByExample(example);
+        if (userList.size() == 0)
+            return null;
+        else
+            return userList.get(0);
     }
 
     @Override
     public List<User> getUsers(User user) {
-        return null;
+        UserExample example = new UserExample();
+        example.createCriteria().andDepartmentEqualTo(user.getDepartment());
+        return mapper.selectByExample(example);
     }
 }

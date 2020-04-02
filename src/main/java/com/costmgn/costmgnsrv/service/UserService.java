@@ -1,7 +1,6 @@
 package com.costmgn.costmgnsrv.service;
 
 import com.costmgn.costmgnsrv.entity.User;
-import com.costmgn.costmgnsrv.utils.ChangePasswordBean;
 
 import java.util.List;
 
@@ -10,11 +9,11 @@ public interface UserService {
 
     void removeUser(int id);
 
-    void updatePassword(ChangePasswordBean bean);
+    void updatePassword(int id, String password);
 
-    boolean login(User bean);
+    boolean login(String userId, String password);
 
-    User getUser(String userid);
+    User getUser(String userId);
 
     List<User> getUsers(User user);
 }
