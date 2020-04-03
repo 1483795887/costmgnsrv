@@ -3,10 +3,14 @@
 <mapper namespace="com.costmgn.costmgnsrv.mapper.WorkMapper">
   <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Work">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="date" jdbcType="DATE" property="date" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <association
+            column="user_id"
+            select="com.costmgn.costmgnsrv.mapper.UserMapper.selectByPrimaryKey"
+
+            property="user"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -97,52 +101,10 @@
     from work
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from work
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample">
-    delete from work
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Work" useGeneratedKeys="true">
-    insert into work (user_id, `date`, `status`, 
-      title)
-    values (#{userId,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Work" useGeneratedKeys="true">
-    insert into work
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="date != null">
-        `date`,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-    </trim>
+    insert into work (user_id, `date`, `status`,
+                      title)
+    values (#{user.id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultType="java.lang.Long">
     select count(*) from work
@@ -150,33 +112,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update work
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.date != null">
-        `date` = #{record.date,jdbcType=DATE},
-      </if>
-      <if test="record.status != null">
-        `status` = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
     update work
     set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
+    user_id = #{record.user.id,jdbcType=INTEGER},
       `date` = #{record.date,jdbcType=DATE},
       `status` = #{record.status,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR}
@@ -184,30 +123,12 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.entity.Work">
-    update work
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        `date` = #{date,jdbcType=DATE},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Work">
     update work
-    set user_id = #{userId,jdbcType=INTEGER},
-      `date` = #{date,jdbcType=DATE},
-      `status` = #{status,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR}
+    set user_id  = #{user.id,jdbcType=INTEGER},
+        `date`   = #{date,jdbcType=DATE},
+        `status` = #{status,jdbcType=VARCHAR},
+        title    = #{title,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
