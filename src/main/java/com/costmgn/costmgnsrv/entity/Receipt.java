@@ -12,7 +12,7 @@ public class Receipt implements Serializable {
 
     private Integer budgetId;
 
-    private Integer workId;
+    private Work work;
 
     private static final long serialVersionUID = 1L;
 
@@ -48,12 +48,12 @@ public class Receipt implements Serializable {
         this.budgetId = budgetId;
     }
 
-    public Integer getWorkId() {
-        return workId;
+    public Work getWork() {
+        return work;
     }
 
-    public void setWorkId(Integer workId) {
-        this.workId = workId;
+    public void setWork(Work work) {
+        this.work = work;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Receipt implements Serializable {
             && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getBudgetId() == null ? other.getBudgetId() == null : this.getBudgetId().equals(other.getBudgetId()))
-            && (this.getWorkId() == null ? other.getWorkId() == null : this.getWorkId().equals(other.getWorkId()));
+                && (this.getWork() == null ? other.getWork() == null : this.getWork().equals(other.getWork()));
     }
 
     @Override
@@ -83,23 +83,21 @@ public class Receipt implements Serializable {
         result = prime * result + ((getMoney() == null) ? 0 : getMoney().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getBudgetId() == null) ? 0 : getBudgetId().hashCode());
-        result = prime * result + ((getWorkId() == null) ? 0 : getWorkId().hashCode());
+        result = prime * result + ((getWork() == null) ? 0 : getWork().hashCode());
         return result;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", money=").append(money);
-        sb.append(", type=").append(type);
-        sb.append(", budgetId=").append(budgetId);
-        sb.append(", workId=").append(workId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return getClass().getSimpleName() +
+                " [" +
+                "Hash = " + hashCode() +
+                ", id=" + id +
+                ", money=" + money +
+                ", type=" + type +
+                ", budgetId=" + budgetId +
+                ", work=" + work +
+                ", serialVersionUID=" + serialVersionUID +
+                "]";
     }
 }

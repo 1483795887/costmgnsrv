@@ -16,7 +16,7 @@ public class Budget implements Serializable {
 
     private BigDecimal occupyMoney;
 
-    private Integer workId;
+    private Work work;
 
     private static final long serialVersionUID = 1L;
 
@@ -68,12 +68,12 @@ public class Budget implements Serializable {
         this.occupyMoney = occupyMoney;
     }
 
-    public Integer getWorkId() {
-        return workId;
+    public Work getWork() {
+        return work;
     }
 
-    public void setWorkId(Integer workId) {
-        this.workId = workId;
+    public void setWork(Work work) {
+        this.work = work;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Budget implements Serializable {
             && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getOccupyMoney() == null ? other.getOccupyMoney() == null : this.getOccupyMoney().equals(other.getOccupyMoney()))
-            && (this.getWorkId() == null ? other.getWorkId() == null : this.getWorkId().equals(other.getWorkId()));
+                && (this.getWork() == null ? other.getWork() == null : this.getWork().equals(other.getWork()));
     }
 
     @Override
@@ -107,25 +107,23 @@ public class Budget implements Serializable {
         result = prime * result + ((getMoney() == null) ? 0 : getMoney().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getOccupyMoney() == null) ? 0 : getOccupyMoney().hashCode());
-        result = prime * result + ((getWorkId() == null) ? 0 : getWorkId().hashCode());
+        result = prime * result + ((getWork() == null) ? 0 : getWork().hashCode());
         return result;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", year=").append(year);
-        sb.append(", month=").append(month);
-        sb.append(", money=").append(money);
-        sb.append(", type=").append(type);
-        sb.append(", occupyMoney=").append(occupyMoney);
-        sb.append(", workId=").append(workId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return getClass().getSimpleName() +
+                " [" +
+                "Hash = " + hashCode() +
+                ", id=" + id +
+                ", year=" + year +
+                ", month=" + month +
+                ", money=" + money +
+                ", type=" + type +
+                ", occupyMoney=" + occupyMoney +
+                ", work=" + work +
+                ", serialVersionUID=" + serialVersionUID +
+                "]";
     }
 }

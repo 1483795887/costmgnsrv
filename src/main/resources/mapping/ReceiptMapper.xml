@@ -6,7 +6,10 @@
     <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="budget_id" jdbcType="INTEGER" property="budgetId" />
-    <result column="work_id" jdbcType="INTEGER" property="workId" />
+    <association
+            column="work_id"
+            select="com.costmgn.costmgnsrv.mapper.WorkMapper.selectByPrimaryKey"
+            property="work"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -97,52 +100,11 @@
     from receipt
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from receipt
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.costmgn.costmgnsrv.entity.ReceiptExample">
-    delete from receipt
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Receipt" useGeneratedKeys="true">
     insert into receipt (money, `type`, budget_id, 
       work_id)
-    values (#{money,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, #{budgetId,jdbcType=INTEGER}, 
-      #{workId,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Receipt" useGeneratedKeys="true">
-    insert into receipt
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="money != null">
-        money,
-      </if>
-      <if test="type != null">
-        `type`,
-      </if>
-      <if test="budgetId != null">
-        budget_id,
-      </if>
-      <if test="workId != null">
-        work_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="money != null">
-        #{money,jdbcType=DECIMAL},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="budgetId != null">
-        #{budgetId,jdbcType=INTEGER},
-      </if>
-      <if test="workId != null">
-        #{workId,jdbcType=INTEGER},
-      </if>
-    </trim>
+    values (#{money,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, #{budgetId,jdbcType=INTEGER},
+            #{work.id,jdbcType=INTEGER})
   </insert>
   <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.ReceiptExample" resultType="java.lang.Long">
     select count(*) from receipt
@@ -150,64 +112,23 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update receipt
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.money != null">
-        money = #{record.money,jdbcType=DECIMAL},
-      </if>
-      <if test="record.type != null">
-        `type` = #{record.type,jdbcType=VARCHAR},
-      </if>
-      <if test="record.budgetId != null">
-        budget_id = #{record.budgetId,jdbcType=INTEGER},
-      </if>
-      <if test="record.workId != null">
-        work_id = #{record.workId,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
     update receipt
     set id = #{record.id,jdbcType=INTEGER},
       money = #{record.money,jdbcType=DECIMAL},
       `type` = #{record.type,jdbcType=VARCHAR},
       budget_id = #{record.budgetId,jdbcType=INTEGER},
-      work_id = #{record.workId,jdbcType=INTEGER}
+    work_id = #{record.work.id,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.costmgn.costmgnsrv.entity.Receipt">
-    update receipt
-    <set>
-      <if test="money != null">
-        money = #{money,jdbcType=DECIMAL},
-      </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="budgetId != null">
-        budget_id = #{budgetId,jdbcType=INTEGER},
-      </if>
-      <if test="workId != null">
-        work_id = #{workId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Receipt">
     update receipt
-    set money = #{money,jdbcType=DECIMAL},
-      `type` = #{type,jdbcType=VARCHAR},
-      budget_id = #{budgetId,jdbcType=INTEGER},
-      work_id = #{workId,jdbcType=INTEGER}
+    set money     = #{money,jdbcType=DECIMAL},
+        `type`    = #{type,jdbcType=VARCHAR},
+        budget_id = #{budgetId,jdbcType=INTEGER},
+        work_id   = #{work.id,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
