@@ -9,7 +9,7 @@ public class Plan implements Serializable {
 
     private String description;
 
-    private Integer workId;
+    private Work work;
 
     private static final long serialVersionUID = 1L;
 
@@ -37,12 +37,12 @@ public class Plan implements Serializable {
         this.description = description;
     }
 
-    public Integer getWorkId() {
-        return workId;
+    public Work getWork() {
+        return work;
     }
 
-    public void setWorkId(Integer workId) {
-        this.workId = workId;
+    public void setWork(Work work) {
+        this.work = work;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Plan implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
             && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
-            && (this.getWorkId() == null ? other.getWorkId() == null : this.getWorkId().equals(other.getWorkId()));
+                && (this.getWork() == null ? other.getWork() == null : this.getWork().equals(other.getWork()));
     }
 
     @Override
@@ -70,22 +70,20 @@ public class Plan implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
-        result = prime * result + ((getWorkId() == null) ? 0 : getWorkId().hashCode());
+        result = prime * result + ((getWork() == null) ? 0 : getWork().hashCode());
         return result;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", title=").append(title);
-        sb.append(", description=").append(description);
-        sb.append(", workId=").append(workId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return getClass().getSimpleName() +
+                " [" +
+                "Hash = " + hashCode() +
+                ", id=" + id +
+                ", title=" + title +
+                ", description=" + description +
+                ", work=" + work +
+                ", serialVersionUID=" + serialVersionUID +
+                "]";
     }
 }
