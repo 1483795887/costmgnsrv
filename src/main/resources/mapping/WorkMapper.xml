@@ -5,8 +5,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="date" jdbcType="DATE" property="date" />
     <result column="status" jdbcType="INTEGER" property="status"/>
-    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="INTEGER" property="type"/>
     <result column="department" javaType="INTEGER" property="department"/>
+    <result column="entity_id" javaType="INTEGER" property="entityId"/>
     <association
             column="user_id"
             select="com.costmgn.costmgnsrv.mapper.UserMapper.selectByPrimaryKey"
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, `date`, `status`, title, department
+    id, user_id, `date`, `status`, type, department, entity_id
   </sql>
   <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultMap="BaseResultMap">
     select
@@ -101,12 +102,31 @@
     from work
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByUserId" parameterType="Integer" resultType="int">
+    select entity_id
+    from work
+    where user_id = #{userid}
+      and status = #{status}
+      and type = #{type}
+  </select>
+  <select id="selectByDepartment" parameterType="Integer" resultType="int">
+    select entity_id
+    from work
+    where department = #{department}
+      and status = #{status}
+      and type = #{type}
+  </select>
+  <select id="selectAll" parameterType="Integer" resultType="int">
+    select entity_id
+    from work
+    where status = #{status}
+      and type = #{type}
+  </select>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Work" useGeneratedKeys="true">
-    insert into work (user_id, `date`, `status`, title, department)
-    values (#{user.id,jdbcType=INTEGER},
-            #{date,jdbcType=DATE},
-            #{status,jdbcType=INTEGER},
-            #{title,jdbcType=VARCHAR},
+    insert into work (user_id, `date`, `status`, type, department)
+    values (#{user.id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
             #{department,jdbcType=INTEGER})
   </insert>
   <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultType="java.lang.Long">
@@ -121,8 +141,9 @@
     user_id = #{record.user.id,jdbcType=INTEGER},
       `date` = #{record.date,jdbcType=DATE},
     `status` = #{record.status,jdbcType=INTEGER},
-    title = #{record.title,jdbcType=VARCHAR},
-    department = #{department,jdbcType=INTEGER}
+    type = #{record.type,jdbcType=INTEGER},
+    department = #{record.department,jdbcType=INTEGER},
+    entity_id=#{record.entityId,jdbc=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -132,8 +153,9 @@
     set user_id    = #{user.id,jdbcType=INTEGER},
         `date`     = #{date,jdbcType=DATE},
         `status`   = #{status,jdbcType=INTEGER},
-        title      = #{title,jdbcType=VARCHAR},
-        department = #{department,jdbcType=INTEGER}
+        type       = #{type,jdbcType=VARCHAR},
+        department = #{department,jdbcType=INTEGER},
+        entity_id  = #{entityId, jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

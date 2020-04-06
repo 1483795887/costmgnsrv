@@ -3,6 +3,7 @@ package com.costmgn.costmgnsrv.service;
 import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.utils.Department;
+import com.costmgn.costmgnsrv.utils.EntityType;
 import com.costmgn.costmgnsrv.utils.Post;
 import com.costmgn.costmgnsrv.utils.Status;
 import org.junit.Before;
@@ -47,7 +48,7 @@ public class WorkServiceTest {
         for (int i = 0; i < n; i++) {
             Work work = new Work();
             work.setUser(user);
-            work.setTitle("123456");
+            work.setType(EntityType.PLAN.ordinal());
             workService.addWork(work);
             workService.updateStatus(work.getId(), status.ordinal());
         }

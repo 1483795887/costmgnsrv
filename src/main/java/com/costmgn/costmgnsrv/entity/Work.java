@@ -14,7 +14,9 @@ public class Work implements Serializable {
 
     private Integer department;
 
-    private String title;
+    private Integer type;
+
+    private Integer entityId;
 
     private static final long serialVersionUID = 1L;
 
@@ -50,12 +52,12 @@ public class Work implements Serializable {
         this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
 
@@ -65,6 +67,14 @@ public class Work implements Serializable {
 
     public void setDepartment(Integer department) {
         this.department = department;
+    }
+
+    public Integer getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(Integer entityId) {
+        this.entityId = entityId;
     }
 
     @Override
@@ -83,7 +93,7 @@ public class Work implements Serializable {
                 && (this.getUser() == null ? other.getUser() == null : this.getUser().equals(other.getUser()))
             && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()));
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()));
     }
 
     @Override
@@ -94,8 +104,9 @@ public class Work implements Serializable {
         result = prime * result + ((getUser() == null) ? 0 : getUser().hashCode());
         result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
+        result = prime * result + ((getEntityId() == null) ? 0 : getEntityId().hashCode());
         return result;
     }
 
@@ -109,7 +120,8 @@ public class Work implements Serializable {
                 ", date=" + date +
                 ", status=" + status +
                 ", department=" + department +
-                ", title=" + title +
+                ", type=" + type +
+                ", entityId=" + entityId +
                 ", serialVersionUID=" + serialVersionUID +
                 "]";
     }

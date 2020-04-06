@@ -117,6 +117,12 @@
     from plan,work
     where plan.work_id=work.id and work.status=#{status}
   </select>
+  <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from plan
+    where id in #{ids}
+  </select>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Plan" useGeneratedKeys="true">
     insert into plan (title, description, work_id
       )

@@ -2,6 +2,7 @@ package com.costmgn.costmgnsrv.mapper;
 
 import com.costmgn.costmgnsrv.entity.*;
 import com.costmgn.costmgnsrv.utils.Department;
+import com.costmgn.costmgnsrv.utils.EntityType;
 import com.costmgn.costmgnsrv.utils.Post;
 import com.costmgn.costmgnsrv.utils.Status;
 import org.junit.Before;
@@ -56,7 +57,7 @@ public class OtherMapperTert {
         work = new Work();
         work.setStatus(Status.NOT_SUBMITTED.ordinal());
         work.setDate(new Date());
-        work.setTitle("test");
+        work.setType(EntityType.PLAN.ordinal());
         work.setUser(user);
         work.setDepartment(user.getDepartment());
         workMapper.insert(work);
@@ -105,7 +106,7 @@ public class OtherMapperTert {
         Plan thePlan = planMapper.selectByPrimaryKey(plan.getId());
 
         assertNotNull(thePlan.getWork());
-        assertEquals(thePlan.getWork().getTitle(), work.getTitle());
+        assertEquals(thePlan.getWork().getType(), work.getType());
         assertNotNull(thePlan.getWork().getUser());
         assertEquals(thePlan.getWork().getUser().getName(), user.getName());
     }
@@ -116,7 +117,7 @@ public class OtherMapperTert {
         Contract theContract = contractMapper.selectByPrimaryKey(plan.getId());
 
         assertNotNull(theContract.getWork());
-        assertEquals(theContract.getWork().getTitle(), work.getTitle());
+        assertEquals(theContract.getWork().getType(), work.getType());
         assertNotNull(theContract.getWork().getUser());
         assertEquals(theContract.getWork().getUser().getName(), user.getName());
     }
@@ -127,7 +128,7 @@ public class OtherMapperTert {
         Budget theBudget = budgetMapper.selectByPrimaryKey(plan.getId());
 
         assertNotNull(theBudget.getWork());
-        assertEquals(theBudget.getWork().getTitle(), work.getTitle());
+        assertEquals(theBudget.getWork().getType(), work.getType());
         assertNotNull(theBudget.getWork().getUser());
         assertEquals(theBudget.getWork().getUser().getName(), user.getName());
     }
@@ -138,7 +139,7 @@ public class OtherMapperTert {
         Receipt receipt = receiptMapper.selectByPrimaryKey(plan.getId());
 
         assertNotNull(receipt.getWork());
-        assertEquals(receipt.getWork().getTitle(), work.getTitle());
+        assertEquals(receipt.getWork().getType(), work.getType());
         assertNotNull(receipt.getWork().getUser());
         assertEquals(receipt.getWork().getUser().getName(), user.getName());
     }

@@ -21,11 +21,12 @@ create table user
 CREATE TABLE work
 (
   id         int PRIMARY KEY AUTO_INCREMENT,
-  user_id    int         NOT NULL,
-  date       date        NOT NULL,
-  status     int         NOT NULL,
-  title      varchar(10) NOT NULL,
-  department int         not null,
+  user_id    int  NOT NULL,
+  date       date NOT NULL,
+  status     int  NOT NULL,
+  type       int  NOT NULL,
+  entity_id  int,
+  department int  not null,
   CONSTRAINT work_user_id_fk FOREIGN KEY (user_id) REFERENCES user (id)
 );
 

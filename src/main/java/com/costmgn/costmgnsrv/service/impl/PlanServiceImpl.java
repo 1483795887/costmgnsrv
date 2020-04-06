@@ -5,13 +5,13 @@ import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.mapper.PlanMapper;
 import com.costmgn.costmgnsrv.mapper.WorkMapper;
+import com.costmgn.costmgnsrv.service.EntitySelector;
 import com.costmgn.costmgnsrv.service.PlanService;
-import com.costmgn.costmgnsrv.utils.Post;
+import com.costmgn.costmgnsrv.utils.EntityType;
 import com.costmgn.costmgnsrv.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,11 +19,13 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService {
     private PlanMapper mapper;
     private WorkMapper workMapper;
+    private EntitySelector selector;
 
     @Autowired
-    public PlanServiceImpl(PlanMapper mapper, WorkMapper workMapper) {
+    public PlanServiceImpl(PlanMapper mapper, WorkMapper workMapper, EntitySelector selector) {
         this.mapper = mapper;
         this.workMapper = workMapper;
+        this.selector = selector;
     }
 
     @Override
@@ -33,41 +35,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<Plan> getPlans(User user, int type) {
-        List<Plan> plans = new ArrayList<>();
-        Post post = Post.values()[user.getPost()];
-        switch (type) {
-            case 1: //维护
-                if (post == Post.SalesMan) {
-                    plans = mapper.selectByUserId(user.getId(), Status.NOT_SUBMITTED.ordinal());
-                    plans.addAll(mapper.selectByUserId(user.getId(), Status.REFUSED.ordinal()));
-                }
-                break;
-            case 2://审计
-                switch (post) {
-                    case DepartmentManager:
-                        plans = mapper.selectByDepartment(user.getDepartment()
-                                , Status.NOT_AUDITED.ordinal());
-                        break;
-                    case SystemManager:
-                        plans = mapper.selectAll(Status.NOT_PASSED.ordinal());
-                        break;
-                }
-            case 3:
-                int status = Status.FINISHED.ordinal();
-                switch (post) {
-                    case SalesMan:
-                        plans = mapper.selectByUserId(user.getId(), status);
-                        break;
-                    case DepartmentManager:
-                        plans = mapper.selectByDepartment(user.getDepartment(), status);
-                        break;
-                    case SystemManager:
-                        plans = mapper.selectAll(status);
-                        break;
-                }
-        }
-
-        return plans;
+        return mapper.selectByIds(selector.getIds(user, type, EntityType.PLAN.ordinal()));
     }
 
     @Override
@@ -75,12 +43,14 @@ public class PlanServiceImpl implements PlanService {
         Work work = new Work();
         work.setUser(user);
         work.setDepartment(user.getDepartment());
-        work.setTitle("方案");
+        work.setType(EntityType.PLAN.ordinal());
         work.setDate(new Date());
         work.setStatus(Status.NOT_SUBMITTED.ordinal());
         workMapper.insert(work);
         bean.setWork(work);
         mapper.insert(bean);
+        work.setEntityId(bean.getId());
+        workMapper.updateByPrimaryKey(work);
     }
 
     @Override
