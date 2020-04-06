@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
     public void addUser(User bean) {
         bean.setInpost(true);
         bean.setPassword(DEFAULT_PASSWORD);
-        bean.setUserid(UserIdMaker.makeId(Department.getDepartmentFromString(bean.getDepartment()),
-                Post.getPostFromString(bean.getPost()), mapper.selectMaxId() + 1));
+        bean.setUserid(UserIdMaker.makeId(Department.values()[bean.getDepartment()],
+                Post.values()[bean.getPost()], mapper.selectMaxId() + 1));
         mapper.insert(bean);
     }
 
@@ -73,9 +73,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsers(User user) {
         UserExample example = new UserExample();
-        if(user.getPost().equals(Post.DepartmentManager.toString()))
+        if (user.getPost().equals(Post.DepartmentManager.ordinal()))
             example.createCriteria().andDepartmentEqualTo(user.getDepartment());
-        else if(!user.getPost().equals(Post.SystemManager.toString()))
+        else if (!user.getPost().equals(Post.SystemManager.ordinal()))
             return new ArrayList<>();
         return mapper.selectByExample(example);
     }

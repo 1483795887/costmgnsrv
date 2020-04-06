@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Work">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="date" jdbcType="DATE" property="date" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status"/>
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="department" javaType="INTEGER" property="department"/>
     <association
             column="user_id"
             select="com.costmgn.costmgnsrv.mapper.UserMapper.selectByPrimaryKey"
-
             property="user"/>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, `date`, `status`, title
+    id, user_id, `date`, `status`, title, department
   </sql>
   <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultMap="BaseResultMap">
     select
@@ -102,9 +102,12 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Work" useGeneratedKeys="true">
-    insert into work (user_id, `date`, `status`,
-                      title)
-    values (#{user.id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR})
+    insert into work (user_id, `date`, `status`, title, department)
+    values (#{user.id,jdbcType=INTEGER},
+            #{date,jdbcType=DATE},
+            #{status,jdbcType=INTEGER},
+            #{title,jdbcType=VARCHAR},
+            #{department,jdbcType=INTEGER})
   </insert>
   <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultType="java.lang.Long">
     select count(*) from work
@@ -117,18 +120,20 @@
     set id = #{record.id,jdbcType=INTEGER},
     user_id = #{record.user.id,jdbcType=INTEGER},
       `date` = #{record.date,jdbcType=DATE},
-      `status` = #{record.status,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR}
+    `status` = #{record.status,jdbcType=INTEGER},
+    title = #{record.title,jdbcType=VARCHAR},
+    department = #{department,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Work">
     update work
-    set user_id  = #{user.id,jdbcType=INTEGER},
-        `date`   = #{date,jdbcType=DATE},
-        `status` = #{status,jdbcType=VARCHAR},
-        title    = #{title,jdbcType=VARCHAR}
+    set user_id    = #{user.id,jdbcType=INTEGER},
+        `date`     = #{date,jdbcType=DATE},
+        `status`   = #{status,jdbcType=INTEGER},
+        title      = #{title,jdbcType=VARCHAR},
+        department = #{department,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

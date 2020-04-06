@@ -13,18 +13,19 @@ create table user
   userid     varchar(20) unique not null,
   password   varchar(20)        not null,
   name       varchar(20)        not null,
-  department varchar(10)        not null,
-  post       varchar(10)        not null,
+  department int                not null,
+  post       int                not null,
   inpost     bool
 );
 
 CREATE TABLE work
 (
-  id      int PRIMARY KEY AUTO_INCREMENT,
-  user_id int         NOT NULL,
-  date    date        NOT NULL,
-  status  varchar(10) NOT NULL,
-  title   varchar(10) NOT NULL,
+  id         int PRIMARY KEY AUTO_INCREMENT,
+  user_id    int         NOT NULL,
+  date       date        NOT NULL,
+  status     int         NOT NULL,
+  title      varchar(10) NOT NULL,
+  department int         not null,
   CONSTRAINT work_user_id_fk FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
@@ -80,4 +81,4 @@ CREATE TABLE receipt
 );
 
 insert into user (userid, password, name, department, post, inpost)
-VALUES ("admin", "123456", "张三", "管理", "系统管理员", true)
+VALUES ("admin", "123456", "张三", 2, 2, true)

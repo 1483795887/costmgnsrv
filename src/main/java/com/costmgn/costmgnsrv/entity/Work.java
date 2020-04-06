@@ -10,7 +10,9 @@ public class Work implements Serializable {
 
     private Date date;
 
-    private String status;
+    private Integer status;
+
+    private Integer department;
 
     private String title;
 
@@ -40,11 +42,11 @@ public class Work implements Serializable {
         this.date = date;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -54,6 +56,15 @@ public class Work implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+
+    public Integer getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Integer department) {
+        this.department = department;
     }
 
     @Override
@@ -84,6 +95,7 @@ public class Work implements Serializable {
         result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
         return result;
     }
 
@@ -96,6 +108,7 @@ public class Work implements Serializable {
                 ", user=" + user +
                 ", date=" + date +
                 ", status=" + status +
+                ", department=" + department +
                 ", title=" + title +
                 ", serialVersionUID=" + serialVersionUID +
                 "]";

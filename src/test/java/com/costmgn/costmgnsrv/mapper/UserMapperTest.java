@@ -2,6 +2,8 @@ package com.costmgn.costmgnsrv.mapper;
 
 import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.UserExample;
+import com.costmgn.costmgnsrv.utils.Department;
+import com.costmgn.costmgnsrv.utils.Post;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,9 @@ public class UserMapperTest {
         user.setUserid("20200302");
         user.setName("张三");
         user.setPassword("123456");
-        user.setDepartment("营销");
+        user.setDepartment(Department.SALES.ordinal());
         user.setInpost(false);
-        user.setPost("业务员");
+        user.setPost(Post.SalesMan.ordinal());
         long count = mapper.countByExample(new UserExample());
         mapper.insert(user);
         long acount = mapper.countByExample(new UserExample());

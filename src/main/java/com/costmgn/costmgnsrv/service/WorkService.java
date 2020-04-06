@@ -10,5 +10,7 @@ public interface WorkService {
 
     List<Work> getToDoWorks(User user);
 
-    void updateStatus(int id, String status);
+    void updateStatus(int id, Integer status);
+
+    void addWork(Work work);
 }

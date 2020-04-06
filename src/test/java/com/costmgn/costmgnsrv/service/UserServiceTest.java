@@ -55,14 +55,16 @@ public class UserServiceTest {
 
     @Test
     public void shouldCallInsertWhenAddUser() {
-        service.addUser(new User());
+        testUser.setPost(Post.SalesMan.ordinal());
+        testUser.setDepartment(Department.PRODUCE.ordinal());
+        service.addUser(testUser);
         verify(mapper).insert(any(User.class));
     }
 
     @Test
     public void shouldSetDefaultValueWhenAddUser() {
-        testUser.setPost(Post.SalesMan.toString());
-        testUser.setDepartment(Department.PRODUCE.toString());
+        testUser.setPost(Post.SalesMan.ordinal());
+        testUser.setDepartment(Department.PRODUCE.ordinal());
         testUser.setPassword(null);
         testUser.setInpost(false);
         when(mapper.selectMaxId()).thenReturn(1);

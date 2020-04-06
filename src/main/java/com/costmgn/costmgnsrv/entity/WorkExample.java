@@ -342,8 +342,13 @@ public class WorkExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(String value) {
+        public Criteria andStatusEqualTo(Integer value) {
             addCriterion("`status` =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentEqualTo(Integer value) {
+            addCriterion("department=", value, "department");
             return (Criteria) this;
         }
 

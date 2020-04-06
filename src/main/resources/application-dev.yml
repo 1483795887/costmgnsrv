@@ -13,3 +13,9 @@ spring:
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.costmgn.costmgnsrv.entity
+logging:
+  level:
+    com:
+      costmgn:
+        costmgnsrv:
+          mapper: debug

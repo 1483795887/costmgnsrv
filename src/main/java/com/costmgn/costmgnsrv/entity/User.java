@@ -11,9 +11,9 @@ public class User implements Serializable {
 
     private String name;
 
-    private String department;
+    private Integer department;
 
-    private String post;
+    private Integer post;
 
     private Boolean inpost;
 
@@ -51,19 +51,19 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getDepartment() {
+    public Integer getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Integer department) {
         this.department = department;
     }
 
-    public String getPost() {
+    public Integer getPost() {
         return post;
     }
 
-    public void setPost(String post) {
+    public void setPost(Integer post) {
         this.post = post;
     }
 
@@ -112,19 +112,17 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userid=").append(userid);
-        sb.append(", password=").append(password);
-        sb.append(", name=").append(name);
-        sb.append(", department=").append(department);
-        sb.append(", post=").append(post);
-        sb.append(", inpost=").append(inpost);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return getClass().getSimpleName() +
+                " [" +
+                "Hash = " + hashCode() +
+                ", id=" + id +
+                ", userid=" + userid +
+                ", password=" + password +
+                ", name=" + name +
+                ", department=" + department +
+                ", post=" + post +
+                ", inpost=" + inpost +
+                ", serialVersionUID=" + serialVersionUID +
+                "]";
     }
 }

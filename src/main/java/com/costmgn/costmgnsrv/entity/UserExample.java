@@ -269,71 +269,6 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotEqualTo(String value) {
-            addCriterion("`password` <>", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordGreaterThan(String value) {
-            addCriterion("`password` >", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordGreaterThanOrEqualTo(String value) {
-            addCriterion("`password` >=", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordLessThan(String value) {
-            addCriterion("`password` <", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordLessThanOrEqualTo(String value) {
-            addCriterion("`password` <=", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordLike(String value) {
-            addCriterion("`password` like", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordNotLike(String value) {
-            addCriterion("`password` not like", value, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordIn(List<String> values) {
-            addCriterion("`password` in", values, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordNotIn(List<String> values) {
-            addCriterion("`password` not in", values, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordBetween(String value1, String value2) {
-            addCriterion("`password` between", value1, value2, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordNotBetween(String value1, String value2) {
-            addCriterion("`password` not between", value1, value2, "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameIsNull() {
-            addCriterion("`name` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameIsNotNull() {
-            addCriterion("`name` is not null");
-            return (Criteria) this;
-        }
-
         public Criteria andNameEqualTo(String value) {
             addCriterion("`name` =", value, "name");
             return (Criteria) this;
@@ -369,11 +304,6 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("`name` not like", value, "name");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIn(List<String> values) {
             addCriterion("`name` in", values, "name");
             return (Criteria) this;
@@ -404,28 +334,13 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andDepartmentEqualTo(String value) {
+        public Criteria andDepartmentEqualTo(Integer value) {
             addCriterion("department =", value, "department");
             return (Criteria) this;
         }
 
-        public Criteria andDepartmentNotEqualTo(String value) {
+        public Criteria andDepartmentNotEqualTo(Integer value) {
             addCriterion("department <>", value, "department");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentGreaterThan(String value) {
-            addCriterion("department >", value, "department");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentGreaterThanOrEqualTo(String value) {
-            addCriterion("department >=", value, "department");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentLessThan(String value) {
-            addCriterion("department <", value, "department");
             return (Criteria) this;
         }
 
@@ -474,7 +389,7 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andPostEqualTo(String value) {
+        public Criteria andPostEqualTo(Integer value) {
             addCriterion("post =", value, "post");
             return (Criteria) this;
         }

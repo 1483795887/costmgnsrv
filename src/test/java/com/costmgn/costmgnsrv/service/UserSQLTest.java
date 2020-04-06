@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ConditionalSQLTest {
+public class UserSQLTest {
 
     @Autowired
     private UserService service;
@@ -32,26 +32,26 @@ public class ConditionalSQLTest {
     private List<User> getUsersForDifferentDepartment() {
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            String department = "营销";
+            int department = Department.SALES.ordinal();
             User aUser = new User();
             aUser.setName(String.valueOf(i));
             aUser.setDepartment(department);
             if (i == 0)
-                aUser.setPost(Post.DepartmentManager.toString());
+                aUser.setPost(Post.DepartmentManager.ordinal());
             else
-                aUser.setPost(Post.SalesMan.toString());
+                aUser.setPost(Post.SalesMan.ordinal());
             userList.add(aUser);
         }
 
         for (int i = 0; i < 8; i++) {
-            String department = "生产";
+            int department = Department.PRODUCE.ordinal();
             User aUser = new User();
             aUser.setName(String.valueOf(i));
             aUser.setDepartment(department);
             if (i == 0)
-                aUser.setPost(Post.DepartmentManager.toString());
+                aUser.setPost(Post.DepartmentManager.ordinal());
             else
-                aUser.setPost(Post.SalesMan.toString());
+                aUser.setPost(Post.SalesMan.ordinal());
             userList.add(aUser);
         }
 
@@ -61,8 +61,8 @@ public class ConditionalSQLTest {
     @Test
     @Transactional
     public void shouldUsersSameDepWhenUserIsDM() {
-        testUser.setDepartment(Department.PRODUCE.toString());
-        testUser.setPost(Post.DepartmentManager.toString());
+        testUser.setDepartment(Department.PRODUCE.ordinal());
+        testUser.setPost(Post.DepartmentManager.ordinal());
         int oriCount = service.getUsers(testUser).size();
 
         List<User> userList = getUsersForDifferentDepartment();
@@ -76,8 +76,8 @@ public class ConditionalSQLTest {
     @Test
     @Transactional
     public void shouldUsersAllWhenUserIsSM() {
-        testUser.setDepartment(Department.MANAGEMENT.toString());
-        testUser.setPost(Post.SystemManager.toString());
+        testUser.setDepartment(Department.MANAGEMENT.ordinal());
+        testUser.setPost(Post.SystemManager.ordinal());
         int oriCount = service.getUsers(testUser).size();
 
         List<User> userList = getUsersForDifferentDepartment();
@@ -91,8 +91,8 @@ public class ConditionalSQLTest {
     @Test
     @Transactional
     public void shouldNoUsersWhenUserIsSaleMan() {
-        testUser.setDepartment(Department.PRODUCE.toString());
-        testUser.setPost(Post.SalesMan.toString());
+        testUser.setDepartment(Department.PRODUCE.ordinal());
+        testUser.setPost(Post.SalesMan.ordinal());
         int oriCount = service.getUsers(testUser).size();
 
         List<User> userList = getUsersForDifferentDepartment();

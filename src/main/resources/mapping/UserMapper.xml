@@ -6,8 +6,8 @@
     <result column="userid" jdbcType="VARCHAR" property="userid" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="department" jdbcType="VARCHAR" property="department" />
-    <result column="post" jdbcType="VARCHAR" property="post" />
+    <result column="department" jdbcType="INTEGER" property="department"/>
+    <result column="post" jdbcType="INTEGER" property="post"/>
     <result column="inpost" jdbcType="BIT" property="inpost" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -103,8 +103,10 @@
     insert into user (userid, `password`, `name`, 
       department, post, inpost
       )
-    values (#{userid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{department,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, #{inpost,jdbcType=BIT}
+    values (#{userid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+            #{department,jdbcType=INTEGER},
+            #{post,jdbcType=INTEGER},
+            #{inpost,jdbcType=BIT}
       )
   </insert>
   <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.UserExample" resultType="java.lang.Long">
@@ -119,8 +121,8 @@
       userid = #{record.userid,jdbcType=VARCHAR},
       `password` = #{record.password,jdbcType=VARCHAR},
       `name` = #{record.name,jdbcType=VARCHAR},
-      department = #{record.department,jdbcType=VARCHAR},
-      post = #{record.post,jdbcType=VARCHAR},
+    department = #{record.department,jdbcType=INTEGER},
+    post = #{record.post,jdbcType=INTEGER},
       inpost = #{record.inpost,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -128,12 +130,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.User">
     update user
-    set userid = #{userid,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      `name` = #{name,jdbcType=VARCHAR},
-      department = #{department,jdbcType=VARCHAR},
-      post = #{post,jdbcType=VARCHAR},
-      inpost = #{inpost,jdbcType=BIT}
+    set userid     = #{userid,jdbcType=VARCHAR},
+        `password` = #{password,jdbcType=VARCHAR},
+        `name`     = #{name,jdbcType=VARCHAR},
+        department = #{department,jdbcType=INTEGER},
+        post       = #{post,jdbcType=INTEGER},
+        inpost     = #{inpost,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

@@ -4,6 +4,7 @@ import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.utils.Department;
 import com.costmgn.costmgnsrv.utils.Post;
+import com.costmgn.costmgnsrv.utils.Status;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class WorkMapperTest {
     @Transactional
     public void shouldSelectUserWhenSelectWork() {
         User user = new User();
-        user.setPost(Post.SalesMan.toString());
-        user.setDepartment(Department.PRODUCE.toString());
+        user.setPost(Post.SalesMan.ordinal());
+        user.setDepartment(Department.PRODUCE.ordinal());
         user.setName("张三");
         user.setInpost(false);
         user.setUserid("123456");
@@ -37,11 +38,11 @@ public class WorkMapperTest {
         userMapper.insert(user);
 
         Work work = new Work();
-        work.setStatus("未完成");
+        work.setStatus(Status.NOT_SUBMITTED.ordinal());
         work.setDate(new Date());
         work.setTitle("test");
         work.setUser(user);
-
+        work.setDepartment(user.getDepartment());
         workMapper.insert(work);
 
         Work theWork = workMapper.selectByPrimaryKey(work.getId());

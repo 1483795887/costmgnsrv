@@ -43,6 +43,11 @@ public class CostController {
         return WebApiResponse.success(null);
     }
 
+    @RequestMapping("/submitCost")
+    public WebApiResponse<Boolean> submitCost(@RequestBody IdListBean bean) {
+        return WebApiResponse.success(true);
+    }
+
     @RequestMapping("/approveCost")
     public WebApiResponse<Boolean> approveCost(@RequestBody IdListBean bean) {
         return WebApiResponse.success(true);
