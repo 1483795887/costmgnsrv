@@ -10,7 +10,7 @@ public interface PlanService {
 
     List<Plan> getPlans(User user, int type);
 
-    void addPlan(Plan bean);
+    void addPlan(Plan bean, User user);
 
     void updatePlan(Plan bean);
 }

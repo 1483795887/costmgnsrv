@@ -3,6 +3,7 @@ package com.costmgn.costmgnsrv;
 import com.costmgn.costmgnsrv.mapper.OtherMapperTert;
 import com.costmgn.costmgnsrv.mapper.UserMapperTest;
 import com.costmgn.costmgnsrv.mapper.WorkMapperTest;
+import com.costmgn.costmgnsrv.service.PlanServiceTest;
 import com.costmgn.costmgnsrv.service.UserSQLTest;
 import com.costmgn.costmgnsrv.service.UserServiceTest;
 import com.costmgn.costmgnsrv.service.WorkServiceTest;
@@ -17,7 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
         WorkMapperTest.class,
         UserServiceTest.class,
         UserSQLTest.class,
-        WorkServiceTest.class
+        WorkServiceTest.class,
+        PlanServiceTest.class
 })
 @SpringBootTest
 public class CostmgnsrvApplicationTests {
