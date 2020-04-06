@@ -5,6 +5,7 @@ import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.utils.Department;
 import com.costmgn.costmgnsrv.utils.Post;
 import com.costmgn.costmgnsrv.utils.Status;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class WorkServiceTest {
     private WorkService workService;
     @Autowired
     private UserService service;
-    private User salesman, salesman2, departmentManager;
+    private User salesman, salesman2, departmentManager, systemManager;
 
     private User getDefaultUser() {
         User user = new User();
@@ -33,6 +34,13 @@ public class WorkServiceTest {
         user.setInpost(true);
 
         return user;
+    }
+
+    @Before
+    public void setUp() {
+        systemManager = getDefaultUser();
+        systemManager.setDepartment(Department.MANAGEMENT.ordinal());
+        systemManager.setPost(Post.SystemManager.ordinal());
     }
 
     private void addWorkData(User user, int n, Status status) {
@@ -90,6 +98,15 @@ public class WorkServiceTest {
 
     @Test
     @Transactional
+    public void shouldCountZeroWhenGetCurWorksForSM() {
+        addTestDataForWorks();
+        List<Work> workList = workService.getCurWorks(systemManager);
+        assertEquals(workList.size(), 0);
+    }
+
+
+    @Test
+    @Transactional
     public void shouldFinishedNotIncludeWhenGetCurWorks() {
         addTestDataForWorks();
         List<Work> workList = workService.getCurWorks(salesman2);
@@ -117,9 +134,7 @@ public class WorkServiceTest {
     @Transactional
     public void shouldCountRightWhenGetToDoWorksForSystemManager() {
         addTestDataForWorks();
-        User systemManager = new User();
-        systemManager.setDepartment(Department.MANAGEMENT.ordinal());
-        systemManager.setPost(Post.SystemManager.ordinal());
+
         List<Work> workList = workService.getToDoWorks(systemManager);
         assertEquals(7, workList.size());
     }
