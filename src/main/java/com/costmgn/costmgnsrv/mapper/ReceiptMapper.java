@@ -15,6 +15,8 @@ public interface ReceiptMapper {
 
     List<Receipt> selectByIds(@Param("ids") List<Integer> ids);
 
+    List<Receipt> selectByBudgetIds(Integer budgetId);
+
     Receipt selectByPrimaryKey(Integer id);
 
     int updateByExample(@Param("record") Receipt record, @Param("example") ReceiptExample example);

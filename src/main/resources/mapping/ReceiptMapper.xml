@@ -118,6 +118,12 @@
     from receipt
     where id in #{ids}
   </select>
+  <select id="selectByBudgetId" parameterType="int" resultMap="BaseResultMap">
+    select receipt.*
+    from receipt,
+         budget
+    where receipt.id = budget_id
+  </select>
   <update id="updateByExample" parameterType="map">
     update receipt
     set id = #{record.id,jdbcType=INTEGER},
