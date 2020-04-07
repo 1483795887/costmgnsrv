@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         UserSQLTest.class,
         WorkServiceTest.class,
         PlanServiceTest.class,
+        ContractServiceTest.class,
         EntitySelectorTest.class
 })
 @SpringBootTest

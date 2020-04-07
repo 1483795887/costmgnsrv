@@ -10,7 +10,7 @@ public interface ContractService {
 
     List<Contract> getContracts(User user, int type);
 
-    void addContract(Contract bean);
+    void addContract(Contract bean, User user);
 
     void updateContract(Contract bean);
 }

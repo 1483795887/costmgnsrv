@@ -8,11 +8,10 @@ import com.costmgn.costmgnsrv.mapper.WorkMapper;
 import com.costmgn.costmgnsrv.service.EntitySelector;
 import com.costmgn.costmgnsrv.service.PlanService;
 import com.costmgn.costmgnsrv.utils.EntityType;
-import com.costmgn.costmgnsrv.utils.Status;
+import com.costmgn.costmgnsrv.utils.WorkFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -40,12 +39,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void addPlan(Plan bean, User user) {
-        Work work = new Work();
-        work.setUser(user);
-        work.setDepartment(user.getDepartment());
-        work.setType(EntityType.PLAN.ordinal());
-        work.setDate(new Date());
-        work.setStatus(Status.NOT_SUBMITTED.ordinal());
+        Work work = WorkFactory.produceWork(user, EntityType.PLAN);
         workMapper.insert(work);
         bean.setWork(work);
         mapper.insert(bean);

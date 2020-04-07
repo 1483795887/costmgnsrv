@@ -13,6 +13,8 @@ public interface BudgetMapper {
 
     List<Budget> selectByExample(BudgetExample example);
 
+    List<Budget> selectByIds(@Param("ids") List<Integer> ids);
+
     Budget selectByPrimaryKey(Integer id);
 
     int updateByExample(@Param("record") Budget record, @Param("example") BudgetExample example);

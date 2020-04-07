@@ -13,6 +13,8 @@ public interface ReceiptMapper {
 
     List<Receipt> selectByExample(ReceiptExample example);
 
+    List<Receipt> selectByIds(@Param("ids") List<Integer> ids);
+
     Receipt selectByPrimaryKey(Integer id);
 
     int updateByExample(@Param("record") Receipt record, @Param("example") ReceiptExample example);

@@ -15,12 +15,6 @@ public interface PlanMapper {
 
     Plan selectByPrimaryKey(Integer id);
 
-    List<Plan> selectByUserId(@Param("userid") Integer userid, @Param("status") Integer status);
-
-    List<Plan> selectByDepartment(@Param("department") Integer department, @Param("status") Integer status);
-
-    List<Plan> selectAll(@Param("status") Integer status);
-
     List<Plan> selectByIds(@Param("ids") List<Integer> ids);
 
     int updateByExample(@Param("record") Plan record, @Param("example") PlanExample example);

@@ -99,24 +99,6 @@
     from plan
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByUserId" parameterType="Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from plan,work
-    where plan.work_id=work.id and work.user_id=#{userid} and work.status=#{status}
-  </select>
-  <select id="selectByDepartment" parameterType="Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from plan,work
-    where plan.work_id=work.id and work.department=#{department} and work.status=#{status}
-  </select>
-  <select id="selectAll" parameterType="Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from plan,work
-    where plan.work_id=work.id and work.status=#{status}
-  </select>
   <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

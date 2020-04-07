@@ -102,6 +102,12 @@
     from budget
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from budget
+    where id in #{ids}
+  </select>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Budget" useGeneratedKeys="true">
     insert into budget (`year`, `month`, money, 
       `type`, occupy_money, work_id

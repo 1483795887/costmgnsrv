@@ -13,6 +13,8 @@ public interface ContractMapper {
 
     List<Contract> selectByExample(ContractExample example);
 
+    List<Contract> selectByIds(@Param("ids") List<Integer> ids);
+
     Contract selectByPrimaryKey(Integer id);
 
     int updateByExample(@Param("record") Contract record, @Param("example") ContractExample example);

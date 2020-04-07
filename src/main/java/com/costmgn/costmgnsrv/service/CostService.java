@@ -10,5 +10,7 @@ public interface CostService {
 
     List<Receipt> getCosts(User user, int type);
 
-    void addCost(Receipt bean);
+    void addCost(Receipt bean, User user);
+
+    void updateCost(Receipt bean);
 }

@@ -10,7 +10,7 @@ public interface BudgetService {
 
     List<Budget> getBudgets(User user, int type);
 
-    void addBudget(Budget bean);
+    void addBudget(Budget bean, User user);
 
     void updateBudget(Budget bean);
 }

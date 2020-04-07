@@ -112,6 +112,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from receipt
+    where id in #{ids}
+  </select>
   <update id="updateByExample" parameterType="map">
     update receipt
     set id = #{record.id,jdbcType=INTEGER},
