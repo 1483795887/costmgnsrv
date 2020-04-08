@@ -3,9 +3,11 @@ package com.costmgn.costmgnsrv.mapper;
 import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.entity.UserExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserMapper {
     long countByExample(UserExample example);
 

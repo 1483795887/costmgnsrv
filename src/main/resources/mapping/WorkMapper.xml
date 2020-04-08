@@ -1,154 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.costmgn.costmgnsrv.mapper.WorkMapper">
-  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Work">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="date" jdbcType="DATE" property="date" />
-    <result column="status" jdbcType="INTEGER" property="status"/>
-    <result column="type" jdbcType="INTEGER" property="type"/>
-    <result column="department" javaType="INTEGER" property="department"/>
-    <result column="entity_id" javaType="INTEGER" property="entityId"/>
-    <association
-            column="user_id"
-            select="com.costmgn.costmgnsrv.mapper.UserMapper.selectByPrimaryKey"
-            property="user"/>
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Work">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="date" jdbcType="DATE" property="date"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="department" javaType="INTEGER" property="department"/>
+        <result column="entity_id" javaType="INTEGER" property="entityId"/>
+        <association
+                column="user_id"
+                select="com.costmgn.costmgnsrv.mapper.UserMapper.selectByPrimaryKey"
+                property="user"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, user_id, `date`, `status`, type, department, entity_id
   </sql>
-  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from work
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from work
-    where id = #{id,jdbcType=INTEGER}
-  </select>
+    <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from work
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from work
+        where id = #{id,jdbcType=INTEGER}
+    </select>
 
-  <select id="selectByUserId" parameterType="Integer" resultType="int">
+    <select id="selectByUserId" parameterType="Integer" resultType="int">
     select entity_id
     from work
     where user_id = #{userid}
       and status = #{status}
       and type = #{type}
   </select>
-  <select id="selectByDepartment" parameterType="Integer" resultType="int">
+    <select id="selectByDepartment" parameterType="Integer" resultType="int">
     select entity_id
     from work
     where department = #{department}
       and status = #{status}
       and type = #{type}
   </select>
-  <select id="selectAll" parameterType="Integer" resultType="int">
+    <select id="selectAll" parameterType="Integer" resultType="int">
     select entity_id
     from work
     where status = #{status}
       and type = #{type}
   </select>
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Work" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Work"
+            useGeneratedKeys="true">
     insert into work (user_id, `date`, `status`, type, department)
     values (#{user.id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
             #{department,jdbcType=INTEGER})
   </insert>
-  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultType="java.lang.Long">
-    select count(*) from work
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExample" parameterType="map">
-    update work
-    set id = #{record.id,jdbcType=INTEGER},
-    user_id = #{record.user.id,jdbcType=INTEGER},
-      `date` = #{record.date,jdbcType=DATE},
-    `status` = #{record.status,jdbcType=INTEGER},
-    type = #{record.type,jdbcType=INTEGER},
-    department = #{record.department,jdbcType=INTEGER},
-    entity_id=#{record.entityId,jdbc=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Work">
+    <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.WorkExample" resultType="java.lang.Long">
+        select count(*) from work
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExample" parameterType="map">
+        update work
+        set id = #{record.id,jdbcType=INTEGER},
+        user_id = #{record.user.id,jdbcType=INTEGER},
+        `date` = #{record.date,jdbcType=DATE},
+        `status` = #{record.status,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=INTEGER},
+        department = #{record.department,jdbcType=INTEGER},
+        entity_id=#{record.entityId,jdbc=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Work">
     update work
     set user_id    = #{user.id,jdbcType=INTEGER},
         `date`     = #{date,jdbcType=DATE},

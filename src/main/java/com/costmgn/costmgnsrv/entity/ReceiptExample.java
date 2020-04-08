@@ -437,6 +437,7 @@ public class ReceiptExample {
     }
 
     /**
+     *
      */
     public static class Criteria extends GeneratedCriteria {
 

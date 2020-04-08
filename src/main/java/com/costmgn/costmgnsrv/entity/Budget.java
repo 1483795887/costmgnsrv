@@ -89,11 +89,11 @@ public class Budget implements Serializable {
         }
         Budget other = (Budget) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getYear() == null ? other.getYear() == null : this.getYear().equals(other.getYear()))
-            && (this.getMonth() == null ? other.getMonth() == null : this.getMonth().equals(other.getMonth()))
-            && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getOccupyMoney() == null ? other.getOccupyMoney() == null : this.getOccupyMoney().equals(other.getOccupyMoney()))
+                && (this.getYear() == null ? other.getYear() == null : this.getYear().equals(other.getYear()))
+                && (this.getMonth() == null ? other.getMonth() == null : this.getMonth().equals(other.getMonth()))
+                && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+                && (this.getOccupyMoney() == null ? other.getOccupyMoney() == null : this.getOccupyMoney().equals(other.getOccupyMoney()))
                 && (this.getWork() == null ? other.getWork() == null : this.getWork().equals(other.getWork()));
     }
 

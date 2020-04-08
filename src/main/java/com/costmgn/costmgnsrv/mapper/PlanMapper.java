@@ -3,9 +3,11 @@ package com.costmgn.costmgnsrv.mapper;
 import com.costmgn.costmgnsrv.entity.Plan;
 import com.costmgn.costmgnsrv.entity.PlanExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface PlanMapper {
     long countByExample(PlanExample example);
 

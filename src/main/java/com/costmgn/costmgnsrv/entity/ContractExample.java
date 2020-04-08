@@ -1005,6 +1005,7 @@ public class ContractExample {
     }
 
     /**
+     *
      */
     public static class Criteria extends GeneratedCriteria {
 

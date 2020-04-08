@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,31 +26,54 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public WebApiResponse<User> login(@RequestBody User user, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User userBean = userService.getUser(user.getUserid());
-        session.setAttribute("user", userBean);
-        return WebApiResponse.success(userBean);
+    public WebApiResponse<User> login(@RequestBody User user,
+                                      HttpServletRequest request) {
+        boolean result = userService.login(user.getUserid(), user.getPassword());
+        if (result) {
+            HttpSession session = request.getSession();
+            User userBean = userService.getUser(user.getUserid());
+            session.setAttribute("user", userBean);
+            return WebApiResponse.success(userBean);
+        } else {
+            return WebApiResponse.error("账号或密码错误");
+        }
     }
 
     @RequestMapping("/updatePassword")
     public WebApiResponse<Boolean> updatePassword(@RequestBody ChangePasswordBean bean) {
+        User user = userService.getUser(bean.getId());
+        if (user == null) {
+            return WebApiResponse.error("账号不存在");//既然登录了那账号就一定存在
+        } else {
+            if (!user.getPassword().equals(bean.getPassword())) {
+                return WebApiResponse.error("密码错误");
+            } else {
+                userService.updatePassword(bean.getId(), bean.getNewPassword());
+            }
+        }
+
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/getUserList")
     public WebApiResponse<List<User>> getUserList(HttpServletRequest request) {
-        List<User> userList = new ArrayList<>();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        List<User> userList = userService.getUsers(user);
         return WebApiResponse.success(userList);
     }
 
     @RequestMapping("/addUser")
-    public WebApiResponse<Boolean> addUser(User bean) {
+    public WebApiResponse<Boolean> addUser(@RequestBody User bean) {
+        userService.addUser(bean);
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/removeUser")
     public WebApiResponse<Boolean> removeUser(@RequestBody IdListBean bean) {
+        for (int id : bean.getIdList()) {
+            userService.removeUser(id);
+        }
         return WebApiResponse.success(true);
     }
 }

@@ -557,6 +557,7 @@ public class BudgetExample {
     }
 
     /**
+     *
      */
     public static class Criteria extends GeneratedCriteria {
 

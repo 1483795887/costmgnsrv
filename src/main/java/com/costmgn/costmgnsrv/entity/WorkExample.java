@@ -479,6 +479,7 @@ public class WorkExample {
     }
 
     /**
+     *
      */
     public static class Criteria extends GeneratedCriteria {
 

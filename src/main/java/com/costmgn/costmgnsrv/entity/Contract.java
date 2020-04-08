@@ -150,17 +150,17 @@ public class Contract implements Serializable {
         }
         Contract other = (Contract) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getContractNo() == null ? other.getContractNo() == null : this.getContractNo().equals(other.getContractNo()))
-            && (this.getContractDate() == null ? other.getContractDate() == null : this.getContractDate().equals(other.getContractDate()))
-            && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
-            && (this.getPayMethod() == null ? other.getPayMethod() == null : this.getPayMethod().equals(other.getPayMethod()))
-            && (this.getPayRequest() == null ? other.getPayRequest() == null : this.getPayRequest().equals(other.getPayRequest()))
-            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()))
-            && (this.getLegalPerson() == null ? other.getLegalPerson() == null : this.getLegalPerson().equals(other.getLegalPerson()))
-            && (this.getLastMonth() == null ? other.getLastMonth() == null : this.getLastMonth().equals(other.getLastMonth()))
-            && (this.getPlanId() == null ? other.getPlanId() == null : this.getPlanId().equals(other.getPlanId()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+                && (this.getContractNo() == null ? other.getContractNo() == null : this.getContractNo().equals(other.getContractNo()))
+                && (this.getContractDate() == null ? other.getContractDate() == null : this.getContractDate().equals(other.getContractDate()))
+                && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
+                && (this.getPayMethod() == null ? other.getPayMethod() == null : this.getPayMethod().equals(other.getPayMethod()))
+                && (this.getPayRequest() == null ? other.getPayRequest() == null : this.getPayRequest().equals(other.getPayRequest()))
+                && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()))
+                && (this.getLegalPerson() == null ? other.getLegalPerson() == null : this.getLegalPerson().equals(other.getLegalPerson()))
+                && (this.getLastMonth() == null ? other.getLastMonth() == null : this.getLastMonth().equals(other.getLastMonth()))
+                && (this.getPlanId() == null ? other.getPlanId() == null : this.getPlanId().equals(other.getPlanId()))
+                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
                 && (this.getWork() == null ? other.getWork() == null : this.getWork().equals(other.getWork()));
     }
 

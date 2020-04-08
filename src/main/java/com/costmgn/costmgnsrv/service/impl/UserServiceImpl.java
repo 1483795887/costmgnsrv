@@ -71,6 +71,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(int id) {
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<User> getUsers(User user) {
         UserExample example = new UserExample();
         if (user.getPost().equals(Post.DepartmentManager.ordinal()))

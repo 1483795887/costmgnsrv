@@ -3,9 +3,11 @@ package com.costmgn.costmgnsrv.mapper;
 import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.entity.WorkExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface WorkMapper {
     long countByExample(WorkExample example);
 

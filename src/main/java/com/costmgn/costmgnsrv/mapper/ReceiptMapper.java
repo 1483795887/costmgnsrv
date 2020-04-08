@@ -3,9 +3,11 @@ package com.costmgn.costmgnsrv.mapper;
 import com.costmgn.costmgnsrv.entity.Receipt;
 import com.costmgn.costmgnsrv.entity.ReceiptExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ReceiptMapper {
     long countByExample(ReceiptExample example);
 

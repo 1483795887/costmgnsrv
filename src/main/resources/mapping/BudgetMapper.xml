@@ -1,114 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.costmgn.costmgnsrv.mapper.BudgetMapper">
-  <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Budget">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="year" jdbcType="INTEGER" property="year" />
-    <result column="month" jdbcType="INTEGER" property="month" />
-    <result column="money" jdbcType="DECIMAL" property="money" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="occupy_money" jdbcType="DECIMAL" property="occupyMoney" />
-    <association
-            column="work_id"
-            select="com.costmgn.costmgnsrv.mapper.WorkMapper.selectByPrimaryKey"
-            property="work"/>
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.costmgn.costmgnsrv.entity.Budget">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="year" jdbcType="INTEGER" property="year"/>
+        <result column="month" jdbcType="INTEGER" property="month"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="occupy_money" jdbcType="DECIMAL" property="occupyMoney"/>
+        <association
+                column="work_id"
+                select="com.costmgn.costmgnsrv.mapper.WorkMapper.selectByPrimaryKey"
+                property="work"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, `year`, `month`, money, `type`, occupy_money, work_id
   </sql>
-  <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.BudgetExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from budget
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from budget
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from budget
-    where id in #{ids}
-  </select>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Budget" useGeneratedKeys="true">
+    <select id="selectByExample" parameterType="com.costmgn.costmgnsrv.entity.BudgetExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from budget
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from budget
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from budget
+        where id in #{ids}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Budget"
+            useGeneratedKeys="true">
     insert into budget (`year`, `month`, money, 
       `type`, occupy_money, work_id
       )
@@ -118,26 +121,26 @@
             #{work.id,jdbcType=INTEGER}
       )
   </insert>
-  <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.BudgetExample" resultType="java.lang.Long">
-    select count(*) from budget
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExample" parameterType="map">
-    update budget
-    set id = #{record.id,jdbcType=INTEGER},
-      `year` = #{record.year,jdbcType=INTEGER},
-      `month` = #{record.month,jdbcType=INTEGER},
-      money = #{record.money,jdbcType=DECIMAL},
-      `type` = #{record.type,jdbcType=VARCHAR},
-      occupy_money = #{record.occupyMoney,jdbcType=DECIMAL},
-    work_id = #{record.work.id,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Budget">
+    <select id="countByExample" parameterType="com.costmgn.costmgnsrv.entity.BudgetExample" resultType="java.lang.Long">
+        select count(*) from budget
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExample" parameterType="map">
+        update budget
+        set id = #{record.id,jdbcType=INTEGER},
+        `year` = #{record.year,jdbcType=INTEGER},
+        `month` = #{record.month,jdbcType=INTEGER},
+        money = #{record.money,jdbcType=DECIMAL},
+        `type` = #{record.type,jdbcType=VARCHAR},
+        occupy_money = #{record.occupyMoney,jdbcType=DECIMAL},
+        work_id = #{record.work.id,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.costmgn.costmgnsrv.entity.Budget">
     update budget
     set `year`       = #{year,jdbcType=INTEGER},
         `month`      = #{month,jdbcType=INTEGER},

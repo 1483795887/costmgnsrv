@@ -3,9 +3,11 @@ package com.costmgn.costmgnsrv.mapper;
 import com.costmgn.costmgnsrv.entity.Budget;
 import com.costmgn.costmgnsrv.entity.BudgetExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface BudgetMapper {
     long countByExample(BudgetExample example);
 

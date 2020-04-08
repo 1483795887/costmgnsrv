@@ -2,20 +2,19 @@ server:
   port: 8081
 
 spring:
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
   datasource:
     username: root
     password: 1234
     url: jdbc:mysql://localhost:3306/costmgn?characterEncoding=utf-8
     driver-class-name: com.mysql.jdbc.Driver
     schema:
-    - classpath:schema.sql
+      - classpath:schema.sql
     initialization-mode: always
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.costmgn.costmgnsrv.entity
-logging:
-  level:
-    com:
-      costmgn:
-        costmgnsrv:
-          mapper: debug

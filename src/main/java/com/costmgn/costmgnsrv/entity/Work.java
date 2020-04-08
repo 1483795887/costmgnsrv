@@ -91,8 +91,8 @@ public class Work implements Serializable {
         Work other = (Work) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getUser() == null ? other.getUser() == null : this.getUser().equals(other.getUser()))
-            && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+                && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
+                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
                 && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()));
     }
 

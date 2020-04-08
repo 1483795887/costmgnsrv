@@ -115,4 +115,10 @@ public class UserServiceTest {
     public void shouldTrueWhenPasswordRight() {
         assertTrue(service.login(USER_ID, OLD_PASSWORD));
     }
+
+    @Test
+    public void shouldCallRightWhenGetUserById() {
+        service.getUser(1);
+        verify(mapper).selectByPrimaryKey(1);
+    }
 }

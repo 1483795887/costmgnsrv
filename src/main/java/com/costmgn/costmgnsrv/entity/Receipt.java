@@ -69,9 +69,9 @@ public class Receipt implements Serializable {
         }
         Receipt other = (Receipt) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getBudgetId() == null ? other.getBudgetId() == null : this.getBudgetId().equals(other.getBudgetId()))
+                && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+                && (this.getBudgetId() == null ? other.getBudgetId() == null : this.getBudgetId().equals(other.getBudgetId()))
                 && (this.getWork() == null ? other.getWork() == null : this.getWork().equals(other.getWork()));
     }
 
