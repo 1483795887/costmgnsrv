@@ -34,7 +34,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public List<Budget> getBudgets(User user, int type) {
-        return mapper.selectByIds(selector.getIds(user, type, EntityType.CONTRACT.ordinal()));
+        return mapper.selectByIds(selector.getIds(user, type, EntityType.BUDGET.ordinal()));
     }
 
     @Override

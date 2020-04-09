@@ -51,12 +51,17 @@ public class CostServiceTest {
     public void shouldCallReceiptInsertWhenAddReceipt() {
         Receipt receipt = new Receipt();
         receipt.setId(1);
+        receipt.setMoney(new BigDecimal(10));
+        receipt.setBudgetId(21);
+        Budget budget = new Budget();
+        budget.setOccupyMoney(new BigDecimal(10));
+        when(budgetMapper.selectByPrimaryKey(21)).thenReturn(budget);
         costService.addCost(receipt, new User());
         verify(receiptMapper).insert(any(Receipt.class));
         ArgumentCaptor<Work> workArgumentCaptor = ArgumentCaptor.forClass(Work.class);
         verify(workMapper).updateByPrimaryKey(workArgumentCaptor.capture());
         assertEquals(workArgumentCaptor.getValue().getEntityId(), 1);
-        assertEquals(workArgumentCaptor.getValue().getType(), EntityType.BUDGET.ordinal());
+        assertEquals(workArgumentCaptor.getValue().getType(), EntityType.RECEIPT.ordinal());
     }
 
     @Test
@@ -86,7 +91,18 @@ public class CostServiceTest {
     @Test
     public void shouldCallWorkInsertWhenAddReceipt() {
         ArgumentCaptor<Work> workArgumentCaptor = ArgumentCaptor.forClass(Work.class);
-        costService.addCost(new Receipt(), salesman);
+
+        Receipt receipt = new Receipt();
+        receipt.setMoney(new BigDecimal(20));
+        receipt.setBudgetId(1);
+        Budget budget = new Budget();
+        budget.setMoney(new BigDecimal(100));
+        budget.setOccupyMoney(new BigDecimal(0));
+        budget.setId(1);
+
+        when(budgetMapper.selectByPrimaryKey(1)).thenReturn(budget);
+
+        costService.addCost(receipt, salesman);
         verify(workMapper).insert(workArgumentCaptor.capture());
         Work work = workArgumentCaptor.getValue();
         assertEquals(work.getStatus(), Status.NOT_SUBMITTED.ordinal());
@@ -110,6 +126,6 @@ public class CostServiceTest {
     @Test
     public void shouldCallSelectorWhenGetReceipts() {
         costService.getCosts(salesman, 1);
-        verify(selector).getIds(salesman, 1, EntityType.BUDGET.ordinal());
+        verify(selector).getIds(salesman, 1, EntityType.RECEIPT.ordinal());
     }
 }

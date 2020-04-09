@@ -41,7 +41,7 @@ public class CostServiceImpl implements CostService {
 
     @Override
     public List<Receipt> getCosts(User user, int type) {
-        return mapper.selectByIds(selector.getIds(user, type, EntityType.CONTRACT.ordinal()));
+        return mapper.selectByIds(selector.getIds(user, type, EntityType.RECEIPT.ordinal()));
     }
 
     @Override

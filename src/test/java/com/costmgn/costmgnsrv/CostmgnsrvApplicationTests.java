@@ -19,13 +19,16 @@ import org.springframework.boot.test.context.SpringBootTest;
         WorkServiceTest.class,
         PlanServiceTest.class,
         ContractServiceTest.class,
+        BudgetServiceTest.class,
+        CostServiceTest.class,
         EntitySelectorTest.class,
 
         UserControllerTest.class,
         WorkControllerTest.class,
         PlanControllerTest.class,
         ContractControllerTest.class,
-        BudgetControllerTest.class
+        BudgetControllerTest.class,
+        CostControllerTest.class
 })
 @SpringBootTest
 public class CostmgnsrvApplicationTests {
