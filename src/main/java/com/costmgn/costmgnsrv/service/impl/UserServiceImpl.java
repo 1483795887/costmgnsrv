@@ -79,8 +79,10 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers(User user) {
         UserExample example = new UserExample();
         if (user.getPost().equals(Post.DepartmentManager.ordinal()))
-            example.createCriteria().andDepartmentEqualTo(user.getDepartment());
-        else if (!user.getPost().equals(Post.SystemManager.ordinal()))
+            example.createCriteria().andDepartmentEqualTo(user.getDepartment()).andInpostEqualTo(true);
+        else if (user.getPost().equals(Post.SystemManager.ordinal()))
+            example.createCriteria().andInpostEqualTo(true);
+        else
             return new ArrayList<>();
         return mapper.selectByExample(example);
     }

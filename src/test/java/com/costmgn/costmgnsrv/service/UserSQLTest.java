@@ -36,6 +36,7 @@ public class UserSQLTest {
             User aUser = new User();
             aUser.setName(String.valueOf(i));
             aUser.setDepartment(department);
+            aUser.setInpost(true);
             if (i == 0)
                 aUser.setPost(Post.DepartmentManager.ordinal());
             else
@@ -48,6 +49,7 @@ public class UserSQLTest {
             User aUser = new User();
             aUser.setName(String.valueOf(i));
             aUser.setDepartment(department);
+            aUser.setInpost(true);
             if (i == 0)
                 aUser.setPost(Post.DepartmentManager.ordinal());
             else
@@ -101,5 +103,77 @@ public class UserSQLTest {
         }
 
         assertEquals(oriCount, service.getUsers(testUser).size());
+    }
+
+    @Test
+    @Transactional
+    public void shouldOnlyGetInPostWhenGetUsersForDM() {
+        testUser.setDepartment(Department.SALES.ordinal());
+        testUser.setPost(Post.DepartmentManager.ordinal());
+        int count = service.getUsers(testUser).size();
+        for (int i = 0; i < 6; i++) {
+            int department = Department.SALES.ordinal();
+            User aUser = new User();
+            aUser.setName(String.valueOf(i));
+            aUser.setDepartment(department);
+            aUser.setInpost(true);
+            if (i == 0)
+                aUser.setPost(Post.DepartmentManager.ordinal());
+            else
+                aUser.setPost(Post.SalesMan.ordinal());
+            service.addUser(aUser);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            int department = Department.SALES.ordinal();
+            User aUser = new User();
+            aUser.setName(String.valueOf(i));
+            aUser.setDepartment(department);
+            aUser.setInpost(false);
+            if (i == 0)
+                aUser.setPost(Post.DepartmentManager.ordinal());
+            else
+                aUser.setPost(Post.SalesMan.ordinal());
+            service.addUser(aUser);
+            service.removeUser(aUser.getId());
+        }
+
+        assertEquals(6 + count, service.getUsers(testUser).size());
+
+    }
+
+    @Test
+    @Transactional
+    public void shouldOnlyGetInPostWhenGetUsersForSM() {
+        testUser.setDepartment(Department.MANAGEMENT.ordinal());
+        testUser.setPost(Post.SystemManager.ordinal());
+        int count = service.getUsers(testUser).size();
+        for (int i = 0; i < 6; i++) {
+            int department = Department.SALES.ordinal();
+            User aUser = new User();
+            aUser.setName(String.valueOf(i));
+            aUser.setDepartment(department);
+            aUser.setInpost(true);
+            if (i == 0)
+                aUser.setPost(Post.DepartmentManager.ordinal());
+            else
+                aUser.setPost(Post.SalesMan.ordinal());
+            service.addUser(aUser);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            int department = Department.SALES.ordinal();
+            User aUser = new User();
+            aUser.setName(String.valueOf(i));
+            aUser.setDepartment(department);
+            aUser.setInpost(false);
+            if (i == 0)
+                aUser.setPost(Post.DepartmentManager.ordinal());
+            else
+                aUser.setPost(Post.SalesMan.ordinal());
+            service.addUser(aUser);
+            service.removeUser(aUser.getId());
+        }
+        assertEquals(6 + count, service.getUsers(testUser).size());
     }
 }
