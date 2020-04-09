@@ -1,8 +1,6 @@
 package com.costmgn.costmgnsrv;
 
-import com.costmgn.costmgnsrv.controller.PlanControllerTest;
-import com.costmgn.costmgnsrv.controller.UserControllerTest;
-import com.costmgn.costmgnsrv.controller.WorkControllerTest;
+import com.costmgn.costmgnsrv.controller.*;
 import com.costmgn.costmgnsrv.mapper.OtherMapperTert;
 import com.costmgn.costmgnsrv.mapper.UserMapperTest;
 import com.costmgn.costmgnsrv.mapper.WorkMapperTest;
@@ -25,7 +23,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
         UserControllerTest.class,
         WorkControllerTest.class,
-        PlanControllerTest.class
+        PlanControllerTest.class,
+        ContractControllerTest.class,
+        BudgetControllerTest.class
 })
 @SpringBootTest
 public class CostmgnsrvApplicationTests {
