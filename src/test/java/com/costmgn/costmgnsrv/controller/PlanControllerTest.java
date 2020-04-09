@@ -37,6 +37,7 @@ public class PlanControllerTest {
     private static final String URL_ADD_PLAN = "/plan/addPlan";
     private static final String URL_UPDATE_PLAN = "/plan/updatePlan";
     private static final String URL_GET_PLAN = "/plan/getPlan";
+    private static final String URL_GET_PLANS = "/plan/getPlans";
     private static final String URL_SUBMIT_PLAN = "/plan/submitPlan";
     private static final String URL_APPROVE_PLAN = "/plan/approvePlan";
     private static final String URL_REFUSE_PLAN = "/plan/refusePlan";
@@ -136,5 +137,13 @@ public class PlanControllerTest {
 
         verify(workService, times(10))
                 .updateStatus(anyInt(), eq(Status.FINISHED.ordinal()));
+    }
+
+    @Test
+    public void shouldCallRightWhenGetPlans() throws Exception {
+        postHelper.setSessionItem("user", user);
+        postHelper.getList(URL_GET_PLANS, 1, Plan.class);
+        verify(service).getPlans(userArgumentCaptor.capture(), eq(1));
+        assertEquals(userArgumentCaptor.getValue().getName(), user.getName());
     }
 }

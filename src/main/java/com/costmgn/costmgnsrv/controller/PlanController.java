@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +29,8 @@ public class PlanController {
     }
 
     @RequestMapping("/addPlan")
-    public WebApiResponse<Boolean> addPlan(@RequestBody Plan plan, HttpServletRequest request) {
+    public WebApiResponse<Boolean> addPlan(@RequestBody Plan plan,
+                                           HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         planService.addPlan(plan, user);
         return WebApiResponse.success(true);
@@ -43,8 +43,10 @@ public class PlanController {
     }
 
     @RequestMapping("/getPlans")
-    public WebApiResponse<List<Plan>> getPlans(HttpServletRequest request, @RequestBody int type) {
-        List<Plan> planList = new ArrayList<>();
+    public WebApiResponse<List<Plan>> getPlans(@RequestBody int type,
+                                               HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        List<Plan> planList = planService.getPlans(user, type);
         return WebApiResponse.success(planList);
     }
 
