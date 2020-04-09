@@ -1,9 +1,11 @@
 package com.costmgn.costmgnsrv.controller;
 
 import com.costmgn.costmgnsrv.entity.Plan;
+import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.service.PlanService;
 import com.costmgn.costmgnsrv.service.WorkService;
 import com.costmgn.costmgnsrv.utils.IdListBean;
+import com.costmgn.costmgnsrv.utils.Status;
 import com.costmgn.costmgnsrv.utils.WebApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,12 +30,15 @@ public class PlanController {
     }
 
     @RequestMapping("/addPlan")
-    public WebApiResponse<Boolean> addPlan(@RequestBody Plan plan) {
+    public WebApiResponse<Boolean> addPlan(@RequestBody Plan plan, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        planService.addPlan(plan, user);
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/updatePlan")
     public WebApiResponse<Boolean> updatePlan(@RequestBody Plan bean) {
+        planService.updatePlan(bean);
         return WebApiResponse.success(true);
     }
 
@@ -44,22 +49,31 @@ public class PlanController {
     }
 
     @RequestMapping("/getPlan")
-    public WebApiResponse<Plan> getPlan(int id) {
-        return WebApiResponse.success(null);
+    public WebApiResponse<Plan> getPlan(@RequestBody int id) {
+        return WebApiResponse.success(planService.getPlan(id));
     }
 
     @RequestMapping("/submitPlan")
     public WebApiResponse<Boolean> submitPlan(@RequestBody IdListBean bean) {
+        for (int id : bean.getIdList()) {
+            workService.updateStatus(id, Status.NOT_AUDITED.ordinal());
+        }
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/approvePlan")
     public WebApiResponse<Boolean> approvePlan(@RequestBody IdListBean bean) {
+        for (int id : bean.getIdList()) {
+            workService.updateStatus(id, Status.FINISHED.ordinal());
+        }
         return WebApiResponse.success(true);
     }
 
     @RequestMapping("/refusePlan")
     public WebApiResponse<Boolean> refusePlan(@RequestBody IdListBean bean) {
+        for (int id : bean.getIdList()) {
+            workService.updateStatus(id, Status.REFUSED.ordinal());
+        }
         return WebApiResponse.success(true);
     }
 }
