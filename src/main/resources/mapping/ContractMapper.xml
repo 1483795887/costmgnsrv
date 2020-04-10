@@ -138,7 +138,10 @@
         select
         <include refid="Base_Column_List"/>
         from contract
-        where id in #{ids}
+        where id in
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
     <update id="updateByExample" parameterType="map">
         update contract

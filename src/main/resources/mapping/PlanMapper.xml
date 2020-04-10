@@ -105,7 +105,10 @@
         select
         <include refid="Base_Column_List"/>
         from plan
-        where id in #{ids}
+        where id in
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.costmgn.costmgnsrv.entity.Plan"
             useGeneratedKeys="true">
