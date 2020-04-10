@@ -12,6 +12,7 @@ import com.costmgn.costmgnsrv.utils.WorkFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +35,12 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public List<Budget> getBudgets(User user, int type) {
-        return mapper.selectByIds(selector.getIds(user, type, EntityType.BUDGET.ordinal()));
+        List<Integer> ids = selector.getIds(user, type, EntityType.BUDGET.ordinal());
+        if (ids.size() == 0) {
+            return new ArrayList<>();
+        } else {
+            return mapper.selectByIds(ids);
+        }
     }
 
     @Override

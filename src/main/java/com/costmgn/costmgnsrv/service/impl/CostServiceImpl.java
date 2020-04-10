@@ -14,6 +14,7 @@ import com.costmgn.costmgnsrv.utils.WorkFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,7 +42,12 @@ public class CostServiceImpl implements CostService {
 
     @Override
     public List<Receipt> getCosts(User user, int type) {
-        return mapper.selectByIds(selector.getIds(user, type, EntityType.RECEIPT.ordinal()));
+        List<Integer> ids = selector.getIds(user, type, EntityType.RECEIPT.ordinal());
+        if (ids.size() == 0) {
+            return new ArrayList<>();
+        } else {
+            return mapper.selectByIds(ids);
+        }
     }
 
     @Override
