@@ -5,6 +5,7 @@ import java.util.List;
 
 public class IdListBean {
     private List<Integer> idList;
+    private Integer id;
 
     public IdListBean() {
         idList = new ArrayList<>();
@@ -16,5 +17,13 @@ public class IdListBean {
 
     public void setIdList(List<Integer> idList) {
         this.idList = idList;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

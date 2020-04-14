@@ -2,6 +2,7 @@ package com.costmgn.costmgnsrv.service;
 
 import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.mapper.WorkMapper;
+import com.costmgn.costmgnsrv.utils.EntityType;
 import com.costmgn.costmgnsrv.utils.Post;
 import com.costmgn.costmgnsrv.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,12 @@ public class EntitySelector {
         Post post = Post.values()[user.getPost()];
         switch (type) {
             case 1: //维护
-                if (post == Post.SalesMan) {
+                if (post == Post.SalesMan && entityType != EntityType.BUDGET.ordinal()) {
                     ids = mapper.selectByUserId(user.getId(), Status.NOT_SUBMITTED.ordinal(), entityType);
                     ids.addAll(mapper.selectByUserId(user.getId(), Status.REFUSED.ordinal(), entityType));
+                } else if (post == Post.DepartmentManager && entityType == EntityType.BUDGET.ordinal()) {
+                    ids = mapper.selectByDepartment(user.getDepartment(), Status.NOT_PASSED.ordinal(), entityType);
+                    ids.addAll(mapper.selectByDepartment(user.getDepartment(), Status.REFUSED.ordinal(), entityType));
                 }
                 break;
             case 2://审计
@@ -39,6 +43,7 @@ public class EntitySelector {
                         ids = mapper.selectAll(Status.NOT_PASSED.ordinal(), entityType);
                         break;
                 }
+                break;
             case 3:
                 int status = Status.FINISHED.ordinal();
                 switch (post) {

@@ -65,7 +65,7 @@ public class CostServiceTest {
     }
 
     @Test
-    public void shouldUpdateBudgetWhenAddReceipt() {
+    public void shouldUpdateBudgetWhenOccupyMoney() {
         Receipt receipt = new Receipt();
         receipt.setMoney(new BigDecimal(20));
         receipt.setBudgetId(1);
@@ -75,7 +75,7 @@ public class CostServiceTest {
         budget.setId(1);
 
         when(budgetMapper.selectByPrimaryKey(1)).thenReturn(budget);
-        costService.addCost(receipt, salesman);
+        costService.occupyMoney(receipt);
         verify(budgetMapper).updateByPrimaryKey(any(Budget.class));
 
         assertEquals(budget.getOccupyMoney(), new BigDecimal(20));

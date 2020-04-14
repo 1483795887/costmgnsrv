@@ -102,7 +102,7 @@ public class BudgetControllerTest {
                 ArgumentCaptor.forClass(User.class);
 
         verify(workService, times(10))
-                .updateStatus(anyInt(), eq(Status.NOT_AUDITED.ordinal()));
+                .updateStatus(anyInt(), eq(Status.NOT_PASSED.ordinal()));
     }
 
     @Test

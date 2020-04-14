@@ -131,13 +131,18 @@ public class CostControllerTest {
             idList.add(i);
         }
         bean.setIdList(idList);
+        bean.setId(1);
 
+        when(service.getCost(anyInt())).thenReturn(new Receipt());
         postHelper.getBoolean(URL_APPROVE_COST, bean);
-        ArgumentCaptor<User> userArgumentCaptor =
-                ArgumentCaptor.forClass(User.class);
-
         verify(workService, times(10))
                 .updateStatus(anyInt(), eq(Status.FINISHED.ordinal()));
+        verify(service, times(10))
+                .getCost(anyInt());
+        verify(service, times(10))
+                .updateCost(any(Receipt.class));
+        verify(service, times(10))
+                .occupyMoney(any(Receipt.class));
     }
 
     @Test

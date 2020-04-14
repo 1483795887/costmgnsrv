@@ -12,6 +12,7 @@ import com.costmgn.costmgnsrv.utils.WorkFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class BudgetServiceImpl implements BudgetService {
         Work work = WorkFactory.produceWork(user, EntityType.BUDGET);
         workMapper.insert(work);
         bean.setWork(work);
+        bean.setOccupyMoney(new BigDecimal(0));
         mapper.insert(bean);
         work.setEntityId(bean.getId());
         workMapper.updateByPrimaryKey(work);

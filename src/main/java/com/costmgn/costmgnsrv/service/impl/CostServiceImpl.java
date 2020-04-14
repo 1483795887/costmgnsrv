@@ -63,7 +63,10 @@ public class CostServiceImpl implements CostService {
         mapper.insert(bean);
         work.setEntityId(bean.getId());
         workMapper.updateByPrimaryKey(work);
+    }
 
+    @Override
+    public void occupyMoney(Receipt bean) {
         Budget budget = budgetMapper.selectByPrimaryKey(bean.getBudgetId());
         budget.setOccupyMoney(budget.getOccupyMoney().add(bean.getMoney()));
         budgetMapper.updateByPrimaryKey(budget);

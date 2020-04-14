@@ -58,7 +58,7 @@ public class BudgetController {
     @RequestMapping("/submitBudget")
     public WebApiResponse<Boolean> submitBudget(@RequestBody IdListBean bean) {
         for (int id : bean.getIdList()) {
-            workService.updateStatus(id, Status.NOT_AUDITED.ordinal());
+            workService.updateStatus(id, Status.NOT_PASSED.ordinal());
         }
         return WebApiResponse.success(true);
     }

@@ -134,9 +134,10 @@ public class WorkServiceTest {
     @Test
     @Transactional
     public void shouldCountRightWhenGetToDoWorksForSystemManager() {
+        int count = workService.getToDoWorks(systemManager).size();
         addTestDataForWorks();
 
         List<Work> workList = workService.getToDoWorks(systemManager);
-        assertEquals(7, workList.size());
+        assertEquals(7 + count, workList.size());
     }
 }

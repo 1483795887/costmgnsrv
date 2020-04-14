@@ -8,6 +8,8 @@ import java.util.List;
 public interface CostService {
     Receipt getCost(int id);
 
+    void occupyMoney(Receipt bean);
+
     List<Receipt> getCosts(User user, int type);
 
     List<Receipt> getCosts(Integer budgetId);

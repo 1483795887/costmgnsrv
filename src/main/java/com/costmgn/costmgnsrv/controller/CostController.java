@@ -51,8 +51,8 @@ public class CostController {
     }
 
     @RequestMapping("/getCostsForBudget")
-    public WebApiResponse<List<Receipt>> getCostsForBudget(@RequestBody int costId) {
-        List<Receipt> receiptList = costService.getCosts(costId);
+    public WebApiResponse<List<Receipt>> getCostsForBudget(@RequestBody int budgetId) {
+        List<Receipt> receiptList = costService.getCosts(budgetId);
         return WebApiResponse.success(receiptList);
     }
 
@@ -72,6 +72,10 @@ public class CostController {
     @RequestMapping("/approveCost")
     public WebApiResponse<Boolean> approveCost(@RequestBody IdListBean bean) {
         for (int id : bean.getIdList()) {
+            Receipt receipt = costService.getCost(id);
+            receipt.setBudgetId(bean.getId());
+            costService.updateCost(receipt);
+            costService.occupyMoney(receipt);
             workService.updateStatus(id, Status.FINISHED.ordinal());
         }
         return WebApiResponse.success(true);

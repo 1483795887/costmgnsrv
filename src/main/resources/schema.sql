@@ -42,18 +42,18 @@ CREATE TABLE plan
 CREATE TABLE contract
 (
   id            int PRIMARY KEY AUTO_INCREMENT,
-  contract_no   varchar(20)   NOT NULL,
-  contract_date date          not null,
-  money         decimal(5, 2) not null,
-  pay_method    varchar(10)   not null,
-  pay_request   varchar(10)   not null,
-  company       varchar(20)   not null,
-  legal_person  varchar(10)   not null,
-  last_month    int           not null,
-  plan_id       int           not null,
-  title         varchar(10)   NOT NULL,
+  contract_no   varchar(20)    NOT NULL,
+  contract_date date           not null,
+  money         decimal(10, 2) not null,
+  pay_method    varchar(10)    not null,
+  pay_request   varchar(10)    not null,
+  company       varchar(20)    not null,
+  legal_person  varchar(10)    not null,
+  last_month    int            not null,
+  plan_id       int            not null,
+  title         varchar(10)    NOT NULL,
   description   varchar(200),
-  work_id       int           not null,
+  work_id       int            not null,
   CONSTRAINT contract_work_id_fk FOREIGN KEY (work_id) REFERENCES work (id),
   CONSTRAINT contract_plan_id_fk FOREIGN KEY (plan_id) REFERENCES plan (id)
 );
@@ -61,22 +61,22 @@ CREATE TABLE contract
 CREATE TABLE budget
 (
   id           int PRIMARY KEY AUTO_INCREMENT,
-  year         int           NOT NULL,
-  month        int           not null,
-  money        decimal(5, 2) not null,
-  type         varchar(20)   not null,
-  occupy_money decimal(5, 2) not null,
-  work_id      int           not null,
+  year         int            NOT NULL,
+  month        int            not null,
+  money        decimal(10, 2) not null,
+  type         varchar(20)    not null,
+  occupy_money decimal(10, 2) not null,
+  work_id      int            not null,
   CONSTRAINT budget_work_id_fk FOREIGN KEY (work_id) REFERENCES work (id)
 );
 
 CREATE TABLE receipt
 (
   id        int PRIMARY KEY AUTO_INCREMENT,
-  money     decimal(5, 2) not null,
-  type      varchar(20)   not null,
-  budget_id int           not null,
-  work_id   int           not null,
+  money     decimal(10, 2) not null,
+  type      varchar(20)    not null,
+  budget_id int,
+  work_id   int            not null,
   CONSTRAINT receipt_work_id_fk FOREIGN KEY (work_id) REFERENCES work (id),
   CONSTRAINT receipt_budget_id_fk FOREIGN KEY (budget_id) REFERENCES budget (id)
 );

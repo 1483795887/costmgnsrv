@@ -114,7 +114,7 @@ public class OtherMapperTert {
     @Test
     @Transactional
     public void shouldSelectContractAndUserWhenSelectWork() {
-        Contract theContract = contractMapper.selectByPrimaryKey(plan.getId());
+        Contract theContract = contractMapper.selectByPrimaryKey(contract.getId());
 
         assertNotNull(theContract.getWork());
         assertEquals(theContract.getWork().getType(), work.getType());
@@ -125,7 +125,7 @@ public class OtherMapperTert {
     @Test
     @Transactional
     public void shouldSelectBudgetAndUserWhenSelectWork() {
-        Budget theBudget = budgetMapper.selectByPrimaryKey(plan.getId());
+        Budget theBudget = budgetMapper.selectByPrimaryKey(budget.getId());
 
         assertNotNull(theBudget.getWork());
         assertEquals(theBudget.getWork().getType(), work.getType());
@@ -136,11 +136,11 @@ public class OtherMapperTert {
     @Test
     @Transactional
     public void shouldSelectReceiptAndUserWhenSelectWork() {
-        Receipt receipt = receiptMapper.selectByPrimaryKey(plan.getId());
+        Receipt theReceipt = receiptMapper.selectByPrimaryKey(receipt.getId());
 
-        assertNotNull(receipt.getWork());
-        assertEquals(receipt.getWork().getType(), work.getType());
-        assertNotNull(receipt.getWork().getUser());
-        assertEquals(receipt.getWork().getUser().getName(), user.getName());
+        assertNotNull(theReceipt.getWork());
+        assertEquals(theReceipt.getWork().getType(), work.getType());
+        assertNotNull(theReceipt.getWork().getUser());
+        assertEquals(theReceipt.getWork().getUser().getName(), user.getName());
     }
 }
