@@ -5,6 +5,7 @@ import com.costmgn.costmgnsrv.entity.User;
 import com.costmgn.costmgnsrv.service.CostService;
 import com.costmgn.costmgnsrv.service.WorkService;
 import com.costmgn.costmgnsrv.utils.IdListBean;
+import com.costmgn.costmgnsrv.utils.OccupyBean;
 import com.costmgn.costmgnsrv.utils.Status;
 import com.costmgn.costmgnsrv.utils.WebApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,13 +71,14 @@ public class CostController {
     }
 
     @RequestMapping("/approveCost")
-    public WebApiResponse<Boolean> approveCost(@RequestBody IdListBean bean) {
-        for (int id : bean.getIdList()) {
+    public WebApiResponse<Boolean> approveCost(@RequestBody OccupyBean bean) {
+        for (int id : bean.getReceiptIdList()) {
             Receipt receipt = costService.getCost(id);
-            receipt.setBudgetId(bean.getId());
+            receipt.setBudgetId(bean.getBudgetId());
             costService.updateCost(receipt);
             costService.occupyMoney(receipt);
-            workService.updateStatus(id, Status.FINISHED.ordinal());
+            workService.updateStatus(receipt.getWork().getId()
+                    , Status.FINISHED.ordinal());
         }
         return WebApiResponse.success(true);
     }

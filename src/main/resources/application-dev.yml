@@ -4,6 +4,7 @@ server:
 spring:
   jackson:
     date-format: yyyy-MM-dd
+    time-zone: GMT+8
   http:
     encoding:
       charset: UTF-8

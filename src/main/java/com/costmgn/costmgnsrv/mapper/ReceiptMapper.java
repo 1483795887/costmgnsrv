@@ -17,7 +17,7 @@ public interface ReceiptMapper {
 
     List<Receipt> selectByIds(@Param("ids") List<Integer> ids);
 
-    List<Receipt> selectByBudgetIds(Integer budgetId);
+    List<Receipt> selectByBudgetId(Integer budgetId);
 
     Receipt selectByPrimaryKey(Integer id);
 

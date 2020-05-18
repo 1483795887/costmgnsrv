@@ -29,7 +29,7 @@ public class EntitySelector {
                     ids = mapper.selectByUserId(user.getId(), Status.NOT_SUBMITTED.ordinal(), entityType);
                     ids.addAll(mapper.selectByUserId(user.getId(), Status.REFUSED.ordinal(), entityType));
                 } else if (post == Post.DepartmentManager && entityType == EntityType.BUDGET.ordinal()) {
-                    ids = mapper.selectByDepartment(user.getDepartment(), Status.NOT_PASSED.ordinal(), entityType);
+                    ids = mapper.selectByDepartment(user.getDepartment(), Status.NOT_SUBMITTED.ordinal(), entityType);
                     ids.addAll(mapper.selectByDepartment(user.getDepartment(), Status.REFUSED.ordinal(), entityType));
                 }
                 break;

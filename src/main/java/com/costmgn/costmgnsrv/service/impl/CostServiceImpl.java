@@ -52,7 +52,7 @@ public class CostServiceImpl implements CostService {
 
     @Override
     public List<Receipt> getCosts(Integer budgetId) {
-        return mapper.selectByBudgetIds(budgetId);
+        return mapper.selectByBudgetId(budgetId);
     }
 
     @Override

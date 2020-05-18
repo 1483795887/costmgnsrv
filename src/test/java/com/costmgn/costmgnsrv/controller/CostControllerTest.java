@@ -2,9 +2,11 @@ package com.costmgn.costmgnsrv.controller;
 
 import com.costmgn.costmgnsrv.entity.Receipt;
 import com.costmgn.costmgnsrv.entity.User;
+import com.costmgn.costmgnsrv.entity.Work;
 import com.costmgn.costmgnsrv.service.CostService;
 import com.costmgn.costmgnsrv.service.WorkService;
 import com.costmgn.costmgnsrv.utils.IdListBean;
+import com.costmgn.costmgnsrv.utils.OccupyBean;
 import com.costmgn.costmgnsrv.utils.PostHelper;
 import com.costmgn.costmgnsrv.utils.Status;
 import org.junit.Before;
@@ -125,15 +127,20 @@ public class CostControllerTest {
 
     @Test
     public void shouldCallRightWhenApproveCost() throws Exception {
-        IdListBean bean = new IdListBean();
+        OccupyBean bean = new OccupyBean();
         List<Integer> idList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             idList.add(i);
         }
-        bean.setIdList(idList);
-        bean.setId(1);
+        bean.setReceiptIdList(idList);
+        bean.setBudgetId(1);
 
-        when(service.getCost(anyInt())).thenReturn(new Receipt());
+        Work work = new Work();
+        work.setId(1);
+        Receipt receipt = new Receipt();
+        receipt.setWork(work);
+
+        when(service.getCost(anyInt())).thenReturn(receipt);
         postHelper.getBoolean(URL_APPROVE_COST, bean);
         verify(workService, times(10))
                 .updateStatus(anyInt(), eq(Status.FINISHED.ordinal()));

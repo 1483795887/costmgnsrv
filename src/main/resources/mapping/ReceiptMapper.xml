@@ -126,11 +126,11 @@
         </foreach>
     </select>
     <select id="selectByBudgetId" parameterType="int" resultMap="BaseResultMap">
-    select receipt.*
-    from receipt,
-         budget
-    where receipt.id = budget_id
-  </select>
+        select
+        <include refid="Base_Column_List"/>
+        from receipt
+        where budget_id = #{budgetId,jdbcType=INTEGER}
+    </select>
     <update id="updateByExample" parameterType="map">
         update receipt
         set id = #{record.id,jdbcType=INTEGER},

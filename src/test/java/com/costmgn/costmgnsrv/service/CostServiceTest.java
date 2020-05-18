@@ -85,7 +85,7 @@ public class CostServiceTest {
     public void shouldCallRightWhenGetReceiptsByBudget() {
         int id = 1;
         costService.getCosts(id);
-        verify(receiptMapper).selectByBudgetIds(id);
+        verify(receiptMapper).selectByBudgetId(id);
     }
 
     @Test

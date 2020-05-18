@@ -117,9 +117,14 @@ public class WorkServiceTest {
     @Test
     @Transactional
     public void shouldGetTheWholeDepWhenGetToDoWorks() {
+        departmentManager = getDefaultUser();
+        departmentManager.setUserid("departmentManager");
+        departmentManager.setPost(Post.DepartmentManager.ordinal());
+        departmentManager.setDepartment(Department.PRODUCE.ordinal());
+        int count = workService.getToDoWorks(departmentManager).size();
         addTestDataForWorks();
         List<Work> workList = workService.getToDoWorks(departmentManager);
-        assertEquals(1 + 4, workList.size());
+        assertEquals(count + 1 + 4, workList.size());
     }
 
     @Test
